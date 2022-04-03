@@ -8,7 +8,7 @@ const Home: FC = () => {
   return (
     <Styled.Wrapper>
       <Styled.TitleWrapper>
-        <Typography variant="h5">Search for stuff</Typography>
+        <Typography variant="h5">Search for stuff 🤣</Typography>
       </Styled.TitleWrapper>
       <Styled.SearchBarWrapper>
         <SearchBar />
