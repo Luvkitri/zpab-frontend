@@ -1,10 +1,14 @@
-import LayoutProvider from "@context/layout/Layout.provider";
-import Layout from "@layout/Layout";
+import LayoutProvider from '@context/layout/Layout.provider';
+import Layout from '@layout/Layout';
+
+import Pages from '@pages/Pages';
 
 function App() {
   return (
     <LayoutProvider>
-      <Layout></Layout>
+      <Layout>
+        <Pages />
+      </Layout>
     </LayoutProvider>
   );
 }
