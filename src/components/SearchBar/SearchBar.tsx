@@ -1,9 +1,9 @@
-import { Button, TextField } from '@mui/material';
 import React, { FC, useState } from 'react';
 
+import { SearchBarProps } from './SearchBar.types';
 import * as Styled from './SearchBar.styles';
 
-const SearchBar: FC = () => {
+const SearchBar: FC<SearchBarProps> = ({ handleSearchButtonClick }) => {
   const [value, setValue] = useState('');
 
   const onSearchBarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +18,9 @@ const SearchBar: FC = () => {
         value={value}
         onChange={onSearchBarChange}
       />
-      <Styled.Button variant="outlined">Search</Styled.Button>
+      <Styled.Button variant="outlined" onClick={handleSearchButtonClick}>
+        Search
+      </Styled.Button>
     </Styled.Wrapper>
   );
 };
