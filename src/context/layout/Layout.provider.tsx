@@ -1,8 +1,8 @@
-import { FC, useMemo, useState } from "react";
+import { FC, useMemo, useState } from 'react';
 
-import { LayoutContext } from "./Layout.context";
-import { LayoutDataProps } from "./Layout.types";
-import { initialLayoutData } from "./Layout.utils";
+import { LayoutContext } from './Layout.context';
+import { LayoutDataProps } from './Layout.types';
+import { initialLayoutData } from './Layout.utils';
 
 export const LayoutProvider: FC = ({ children }) => {
   const [layout, setLayout] = useState<LayoutDataProps>(initialLayoutData);
@@ -11,7 +11,7 @@ export const LayoutProvider: FC = ({ children }) => {
     () => (layoutData: LayoutDataProps) => {
       setLayout({ ...initialLayoutData, ...layoutData });
     },
-    [setLayout]
+    [setLayout],
   );
 
   return (
