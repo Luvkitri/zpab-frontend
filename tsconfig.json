@@ -38,6 +38,12 @@
       ],
       "@pages/*": [
         "pages/*"
+      ],
+      "@utils/*": [
+        "utils/*"
+      ],
+      "@services/*": [
+        "services/*"
       ]
     }
   },
