@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 import { Typography } from '@mui/material';
 
 import SearchBar from '@components/SearchBar/SearchBar';
+import Accommodations from '@components/Accommodations/Accommodations';
 import UserService from '@services/User/User.service';
 import { UserDataProps } from '@services/User/User.types';
 
@@ -27,6 +28,7 @@ const Home: FC = () => {
       <Styled.SearchBarWrapper>
         <SearchBar handleSearchButtonClick={handleSearchButtonClick} />
       </Styled.SearchBarWrapper>
+      <Accommodations />
       <Styled.ResultWrapper>
         {users.map((data, index) => (
           <p key={`userData${index}`}>{JSON.stringify(data)}</p>
