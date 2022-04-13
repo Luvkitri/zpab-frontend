@@ -1,6 +1,5 @@
 import { AccommodationDataProps } from '@services/Accomodation/Accommodation.types';
-import React, { Component, FC, useEffect, useState } from 'react';
-import { useAsync } from 'react-async';
+import { FC, useState } from 'react';
 
 import { AccommodationsProps } from './Accommodations.types';
 import * as Styled from './Accommodations.styles';
