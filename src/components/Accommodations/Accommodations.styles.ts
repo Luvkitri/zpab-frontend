@@ -17,3 +17,7 @@ export const Wrapper = styled('div')`
   display: flex;
   flex-direction: row;
 `;
+
+export const Button = styled(MuiButton)`
+  width: 200px;
+`;
