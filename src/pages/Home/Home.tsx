@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import { Typography } from '@mui/material';
 
+import Login from '@components/Login/Login';
 import SearchBar from '@components/SearchBar/SearchBar';
 import UserService from '@services/User/User.service';
 import { UserDataProps } from '@services/User/User.types';
@@ -21,6 +22,8 @@ const Home: FC = () => {
 
   return (
     <Styled.Wrapper>
+      <Login />
+
       <Styled.TitleWrapper>
         <Typography variant="h5">Search for stuff 🤣</Typography>
       </Styled.TitleWrapper>
