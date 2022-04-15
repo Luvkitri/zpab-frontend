@@ -8,6 +8,8 @@ export const Wrapper = styled('div')`
   display: flex;
   flex-direction: row;
 `;
+export const Form = styled('form')`
+`;
 
 export const TextField = styled(MuiTextField)`
   padding-right: 10px;
