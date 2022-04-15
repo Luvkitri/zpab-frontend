@@ -1,9 +1,12 @@
-import React, { FC, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import { SearchBarProps } from './SearchBar.types';
 import * as Styled from './SearchBar.styles';
 
-const SearchBar: FC<SearchBarProps> = ({ handleSearchButtonClick }) => {
+const SearchBar = ({
+  label,
+  handleSearchButtonClick,
+}: SearchBarProps): ReactElement => {
   const [value, setValue] = useState('');
 
   const onSearchBarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,7 +17,7 @@ const SearchBar: FC<SearchBarProps> = ({ handleSearchButtonClick }) => {
     <Styled.Wrapper>
       <Styled.TextField
         fullWidth
-        label="Search for a city/place"
+        label={label}
         value={value}
         onChange={onSearchBarChange}
       />
