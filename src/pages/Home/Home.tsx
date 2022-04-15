@@ -25,7 +25,10 @@ const Home: FC = () => {
         <Typography variant="h5">Search for stuff 🤣</Typography>
       </Styled.TitleWrapper>
       <Styled.SearchBarWrapper>
-        <SearchBar handleSearchButtonClick={handleSearchButtonClick} />
+        <SearchBar
+          label="Search for a City/Place"
+          handleSearchButtonClick={handleSearchButtonClick}
+        />
       </Styled.SearchBarWrapper>
       <Styled.ResultWrapper>
         {users.map((data, index) => (

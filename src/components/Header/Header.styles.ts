@@ -1,19 +1,15 @@
 import { styled } from '@mui/material/styles';
+import {
+  AppBar as MuiAppBar,
+  Toolbar as MuiToolbar,
+  Button as MuiButton,
+} from '@mui/material';
 
-export const Wrapper = styled('nav')`
-  position: sticky;
-  width: 100%;
-  height: 50px;
+export const Wrapper = styled('div')`
   display: flex;
-  background-color: aliceblue;
-  z-index: 10;
+  flex-grow: 1;
 `;
 
-export const ContentWrapper = styled('div')`
-  display: flex;
-  justify-content: space-between;
-`;
+export const AppBar = styled(MuiAppBar)``;
 
-export const GroupWrapper = styled('div')`
-  display: flex;
-`;
+export const Toolbar = styled(MuiToolbar)``;
