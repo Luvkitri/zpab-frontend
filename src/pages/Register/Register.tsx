@@ -2,6 +2,7 @@ import { FC } from 'react';
 import User from '@services/User/User.service';
 import * as Styled from '@layout/Layout.styles';
 import RegisterForm from '@components/RegisterForm';
+import { loginAndRedirect } from '@utils/login';
 
 const Register: FC = () => {
   const handleLoginButtonClick = async (
@@ -14,6 +15,8 @@ const Register: FC = () => {
     let user: any = await User.register(email, password, phone, name);
     console.log({ user });
     localStorage.setItem('dev_User', user); //dev only
+    // Login
+    loginAndRedirect(email, password);
   };
 
   return (

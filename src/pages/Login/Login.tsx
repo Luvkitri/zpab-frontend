@@ -1,10 +1,7 @@
 import { FC } from 'react';
-import { Typography } from '@mui/material';
-import User from '@services/User/User.service';
-
 import LoginForm from '@components/LoginForm/LoginForm';
-
 import * as Styled from '@layout/Layout.styles';
+import { loginAndRedirect } from '@utils/login';
 
 const Login: FC = () => {
   const handleLoginButtonClick = async (
@@ -12,9 +9,7 @@ const Login: FC = () => {
     passwordValue: string,
   ) => {
     console.log(`login with ${emailValue} + ${passwordValue}`);
-    let jwt: string = await User.login(emailValue, passwordValue);
-    console.log({ jwt });
-    localStorage.setItem('Authorization', jwt);
+    loginAndRedirect(emailValue, passwordValue);
   };
 
   return (
