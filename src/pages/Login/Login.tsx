@@ -4,9 +4,9 @@ import User from '@services/User/User.service';
 
 import LoginForm from '@components/LoginForm/LoginForm';
 
-import * as Styled from './Login.styles';
+import * as Styled from '@layout/Layout.styles';
 
-const Home: FC = () => {
+const Login: FC = () => {
   const handleLoginButtonClick = async (
     emailValue: string,
     passwordValue: string,
@@ -24,4 +24,4 @@ const Home: FC = () => {
   );
 };
 
-export default Home;
+export default Login;
