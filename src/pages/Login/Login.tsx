@@ -1,15 +1,18 @@
 import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import LoginForm from '@components/LoginForm/LoginForm';
 import * as Styled from '@layout/Layout.styles';
-import { loginAndRedirect } from '@utils/login';
+import { signIn } from '@utils/login';
 
 const Login: FC = () => {
+  const navigate = useNavigate();
   const handleLoginButtonClick = async (
     emailValue: string,
     passwordValue: string,
   ) => {
-    console.log(`login with ${emailValue} + ${passwordValue}`);
-    loginAndRedirect(emailValue, passwordValue);
+    signIn(emailValue, passwordValue);
+    navigate('/');
   };
 
   return (
