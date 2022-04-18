@@ -8,26 +8,24 @@ const LoginForm: FC<LoginProps> = ({ onLogin }) => {
 
   return (
     <Styled.Wrapper>
-      <form>
-        <Styled.TextField
-          label="email"
-          value={emailValue}
-          onChange={(event) => setEmail(event.target.value)}
-        />
-        <Styled.TextField
-          label="password"
-          type="password"
-          value={passwordValue}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-        {/* <input type="submit" value="Login" /> */}
-        <Styled.Button
-          variant="outlined"
-          onClick={() => onLogin(emailValue, passwordValue)}
-        >
-          Login
-        </Styled.Button>
-      </form>
+      <Styled.TextField
+        label="Email"
+        value={emailValue}
+        onChange={(event) => setEmail(event.target.value)}
+      />
+      <Styled.TextField
+        label="Password"
+        type="password"
+        value={passwordValue}
+        onChange={(event) => setPassword(event.target.value)}
+      />
+      {/* <input type="submit" value="Login" /> */}
+      <Styled.Button
+        variant="outlined"
+        onClick={() => onLogin(emailValue, passwordValue)}
+      >
+        Login
+      </Styled.Button>
     </Styled.Wrapper>
   );
 };
