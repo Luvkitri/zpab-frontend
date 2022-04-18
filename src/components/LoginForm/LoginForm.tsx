@@ -8,6 +8,18 @@ const LoginForm: FC<LoginProps> = ({ onLogin }) => {
   const [emailValue, setEmail] = useState('');
   const [passwordValue, setPassword] = useState('');
 
+  const handleButtonClick = () => {
+    if (emailValue.length == 0) {
+      alert('Email is required');
+      return;
+    }
+    if (passwordValue.length == 0) {
+      alert('Password is required');
+      return;
+    }
+    onLogin(emailValue, passwordValue);
+  };
+
   return (
     <Styled.Wrapper>
       <Styled.TextField
@@ -38,10 +50,7 @@ const LoginForm: FC<LoginProps> = ({ onLogin }) => {
         onChange={(event) => setPassword(event.target.value)}
       />
       {/* <input type="submit" value="Login" /> */}
-      <Styled.Button
-        variant="outlined"
-        onClick={() => onLogin(emailValue, passwordValue)}
-      >
+      <Styled.Button variant="outlined" onClick={handleButtonClick}>
         Login
       </Styled.Button>
     </Styled.Wrapper>

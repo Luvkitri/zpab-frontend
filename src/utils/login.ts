@@ -23,13 +23,20 @@ export const signIn = async (
     emailValue: string,
     passwordValue: string,
 ) => {
-    let token: string = await User.login(emailValue, passwordValue);
-    console.log({ token });
+    let token: string;
+    try {
+        token = await User.login(emailValue, passwordValue);
+        console.log({ token });
+    } catch (error) {
+        return false
+    }
+
     let sth = jwt_decode<Jwt>(token);
     console.log({ sth });
 
     localStorage.setItem(LOCAL_STORAGE_JWT_KEY, token);
     invokeOnSignChange.forEach(f => f());
+    return true;
 
 };
 

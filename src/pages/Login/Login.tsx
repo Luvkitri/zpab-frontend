@@ -11,8 +11,11 @@ const Login: FC = () => {
     emailValue: string,
     passwordValue: string,
   ) => {
-    signIn(emailValue, passwordValue);
-    navigate('/');
+    if (await signIn(emailValue, passwordValue)) {
+      navigate('/');
+    } else {
+      alert('Login failed');
+    }
   };
 
   return (
