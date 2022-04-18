@@ -8,16 +8,27 @@ const LoginForm: FC<LoginProps> = ({ onLogin }) => {
   const [emailValue, setEmail] = useState('');
   const [passwordValue, setPassword] = useState('');
 
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+
   const handleButtonClick = () => {
-    if (emailValue.length == 0) {
-      alert('Email is required');
-      return;
+    let good: boolean = true;
+    if (emailValue.length == 0 || !emailValue.match('[0-9A-z.]@[0-9A-z.]')) {
+      setEmailError(true);
+      good = false;
+    } else {
+      setEmailError(false);
     }
-    if (passwordValue.length == 0) {
-      alert('Password is required');
-      return;
+
+    if (passwordValue.length < 3) {
+      setPasswordError(true);
+      good = false;
+    } else {
+      setPasswordError(false);
     }
-    onLogin(emailValue, passwordValue);
+    if (good) {
+      onLogin(emailValue, passwordValue);
+    }
   };
 
   return (
@@ -25,6 +36,7 @@ const LoginForm: FC<LoginProps> = ({ onLogin }) => {
       <Styled.TextField
         label="Email"
         value={emailValue}
+        error={emailError}
         required
         InputProps={{
           startAdornment: (
@@ -39,6 +51,7 @@ const LoginForm: FC<LoginProps> = ({ onLogin }) => {
         label="Password"
         type="password"
         value={passwordValue}
+        error={passwordError}
         required
         InputProps={{
           startAdornment: (
