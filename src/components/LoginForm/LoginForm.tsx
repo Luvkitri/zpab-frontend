@@ -49,8 +49,7 @@ const LoginForm: FC<LoginProps> = ({ onLogin }) => {
         }}
         onChange={(event) => setPassword(event.target.value)}
       />
-      {/* <input type="submit" value="Login" /> */}
-      <Styled.Button variant="outlined" onClick={handleButtonClick}>
+      <Styled.Button onClick={handleButtonClick} variant="contained">
         Login
       </Styled.Button>
     </Styled.Wrapper>

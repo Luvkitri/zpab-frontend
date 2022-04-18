@@ -13,9 +13,17 @@ const Register: FC = () => {
     phone: string,
     name: string,
   ) => {
-    let user: any = await User.register(email, password, phone, name);
-    signIn(email, password);
-    navigate('/');
+    User.register(email, password, phone, name)
+      .then(async () => {
+        if (await signIn(email, password)) {
+          navigate('/');
+        } else {
+          alert('Login failed');
+        }
+      })
+      .catch((error) => {
+        alert('Registration has failed');
+      });
   };
 
   return (
