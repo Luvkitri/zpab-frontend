@@ -1,18 +1,31 @@
 import axios from '@utils/api';
-import { ResponseUserDataProps } from './User.types';
+import { ResponseUserDataProps, UserDataProps } from './User.types';
 
 class User {
   endpoint: string;
   login_endpoint: string;
+  update_endpoint: string;
 
   constructor() {
     this.endpoint = 'users';
     this.login_endpoint = 'login';
+    this.update_endpoint = `${this.endpoint}/update`;
   }
 
 
-  getAll(): Promise<ResponseUserDataProps> {
-    return axios.get(`${this.endpoint}`);
+  update(id: number, user: UserDataProps) {
+    return axios.put(`${this.update_endpoint}/${id}`, user);
+  }
+  updatePassword(id: number, newPassword: string) {
+    let url = `${this.update_endpoint}/${id}`;
+    let data = { "password": newPassword };
+    console.log({ url })
+    console.log({ data })
+    return axios.put(url, data);
+  }
+
+  get(id: number): Promise<ResponseUserDataProps> {
+    return axios.get(`${this.endpoint}/${id}`);
   }
 
   register(email: string, password: string, phone: string, name: string) {
