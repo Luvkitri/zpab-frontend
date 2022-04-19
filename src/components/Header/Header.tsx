@@ -4,10 +4,10 @@ import * as Styled from './Header.styles';
 const Header = () => {
   return (
     <Styled.Wrapper>
-      <Styled.AppBar position="static">
+      <Styled.AppBar position="fixed">
         <Styled.Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+            FindYourPlace
           </Typography>
           <Button color="inherit">Login</Button>
         </Styled.Toolbar>
