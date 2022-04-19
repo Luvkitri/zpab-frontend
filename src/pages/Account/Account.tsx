@@ -44,18 +44,17 @@ const Account: FC = () => {
       });
   };
 
-  let form;
-  if (user) {
-    form = (
-      <AccountForm
-        onEdit={onEdit}
-        onPasswordChange={onPasswordChange}
-        user={user}
-      />
-    );
-  }
-
-  return <Styled.Wrapper>{form}</Styled.Wrapper>;
+  return (
+    <Styled.Wrapper>
+      {user && (
+        <AccountForm
+          onEdit={onEdit}
+          onPasswordChange={onPasswordChange}
+          user={user}
+        />
+      )}
+    </Styled.Wrapper>
+  );
 };
 
 export default Account;

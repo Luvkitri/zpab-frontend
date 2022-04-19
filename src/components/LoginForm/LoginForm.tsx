@@ -12,7 +12,7 @@ const LoginForm: FC<LoginProps> = ({ onLogin }) => {
   const [passwordError, setPasswordError] = useState(false);
 
   const handleButtonClick = () => {
-    let good: boolean = true;
+    let good = true;
     if (emailValue.length == 0 || !emailValue.match('[0-9A-z.]@[0-9A-z.]')) {
       setEmailError(true);
       good = false;

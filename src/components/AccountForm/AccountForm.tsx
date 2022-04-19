@@ -21,7 +21,7 @@ const AccountForm: FC<AccountProps> = ({ user, onEdit, onPasswordChange }) => {
   };
 
   const handleChangePassword = () => {
-    let good: boolean = true;
+    let good = true;
 
     if (passwordValue.length <= 4) {
       setPasswordError(true);
@@ -35,7 +35,7 @@ const AccountForm: FC<AccountProps> = ({ user, onEdit, onPasswordChange }) => {
     }
   };
   const handleButtonClick = () => {
-    let good: boolean = true;
+    let good = true;
     if (!phoneValue.match('[0-9]{9}')) {
       setPhoneError(true);
       good = false;
