@@ -43,7 +43,6 @@ export const signIn = async (
 export const isSignedIn = () => {
     let token: string | null = localStorage.getItem(LOCAL_STORAGE_JWT_KEY);
     if (token) {
-        // TODO: check if jwt is still valid
         let expiresAt = Number(jwt_decode<Jwt>(token).exp);
         const unixTime = Math.floor(Date.now() / 1000);
         if (unixTime >= expiresAt) {
@@ -64,5 +63,14 @@ export const getUserEmail = (): string => {
         return "" + sth.sub;
     } else {
         return "...";
+    }
+}
+export const getUserId = (): number => {
+    let token: string | null = localStorage.getItem(LOCAL_STORAGE_JWT_KEY);
+    if (token) {
+        let sth = jwt_decode<Jwt>(token);
+        return sth.user_id;
+    } else {
+        throw "Not logged in";
     }
 }

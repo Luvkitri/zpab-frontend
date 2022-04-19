@@ -13,6 +13,9 @@ const Header = () => {
   };
   onSignChange(updateState);
 
+  const handleUsernameButtonClick = () => {
+    navigate('/account');
+  };
   const handleSignOutButtonClick = () => {
     signOut();
     navigate('/');
@@ -20,8 +23,11 @@ const Header = () => {
   let buttons: JSX.Element = <b></b>;
   const buttonsSignedIn = (
     <Styled.ButtonsWrapper>
+      <Button color="inherit" onClick={handleUsernameButtonClick}>
+        {getUserEmail()}
+      </Button>
       <Button color="inherit" onClick={handleSignOutButtonClick}>
-        Logout {getUserEmail()}
+        Logout
       </Button>
     </Styled.ButtonsWrapper>
   );
