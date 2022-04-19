@@ -43,8 +43,14 @@ export const signIn = async (
 export const isSignedIn = () => {
     let token: string | null = localStorage.getItem(LOCAL_STORAGE_JWT_KEY);
     if (token) {
-        // let expiresAt = jwt_decode<Jwt>(token).exp;
         // TODO: check if jwt is still valid
+        let expiresAt = Number(jwt_decode<Jwt>(token).exp);
+        const unixTime = Math.floor(Date.now() / 1000);
+        if (unixTime >= expiresAt) {
+            console.warn("Session timed out");
+            signOut();
+            return false;
+        }
         return true;
     } else {
         return false;
