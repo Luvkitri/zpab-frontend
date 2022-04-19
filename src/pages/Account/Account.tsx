@@ -26,7 +26,6 @@ const Account: FC = () => {
   const onEdit = (user: UserDataProps) => {
     User.update(getUserId(), user)
       .then((response) => {
-        console.log({ response });
         alert('Changes saved.');
       })
       .catch((error) => {
@@ -36,7 +35,6 @@ const Account: FC = () => {
   const onPasswordChange = (newPassword: string) => {
     User.updatePassword(getUserId(), newPassword)
       .then((response) => {
-        console.log({ response });
         alert('Changes saved.');
       })
       .catch((error) => {

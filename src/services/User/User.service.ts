@@ -19,8 +19,6 @@ class User {
   updatePassword(id: number, newPassword: string) {
     let url = `${this.update_endpoint}/${id}`;
     let data = { "password": newPassword };
-    console.log({ url })
-    console.log({ data })
     return axios.put(url, data);
   }
 
@@ -32,7 +30,6 @@ class User {
     return new Promise<string>((resolve, reject) => {
       axios.post(`${this.endpoint}`, { "email": email, "password": password, "phone": phone, "name": name })
         .then(response => {
-          console.log(response);
           if (response.status == 200) {
             resolve(response.data);
           } else {
@@ -48,7 +45,6 @@ class User {
     return new Promise<string>((resolve, reject) => {
       axios.post(`${this.login_endpoint}`, { "email": email, "password": password })
         .then(response => {
-          console.log(response);
           if (response.status == 200) {
             resolve(response.data);
           } else {
