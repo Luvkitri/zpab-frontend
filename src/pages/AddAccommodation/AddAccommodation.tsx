@@ -8,7 +8,7 @@ const AddAccommodation: FC = () => {
   const navigate = useNavigate();
 
   const onAdd = (acc: AccommodationDataProps) => {
-    console.log('onAdd');
+    console.log({ acc });
   };
   return (
     <Styled.Wrapper>

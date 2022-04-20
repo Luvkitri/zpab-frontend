@@ -28,12 +28,15 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
   const [cityError, setCityError] = useState(false);
   const [streetError, setStreetError] = useState(false);
   const [bedsError, setBedsError] = useState(false);
-  // const [descError, setDescError] = useState(false);
 
   const reset = () => {
     setCity(acc ? acc.city : '');
     setStreet(acc ? acc.street : '');
     setDesc(acc ? acc.description : '');
+    setBeds(1);
+    setPets(false);
+    setFrom(defaultFrom.toISOString());
+    setTo(defaultTo.toISOString());
   };
   const validateCity = () => {
     let good = true;
@@ -59,7 +62,6 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
   };
   const validateBeds = () => {
     let good = true;
-    console.log({ bedsValue });
     if (bedsValue <= 0) {
       setBedsError(true);
       good = false;
@@ -77,13 +79,12 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
       let newAccommodation: AccommodationDataProps = {
         city: cityValue,
         street: streetValue,
-        beds: 0,
-        availableFrom: '',
-        availableTo: '',
-        pets: false,
+        beds: bedsValue,
+        availableFrom: fromValue,
+        availableTo: toValue,
+        pets: petsValue,
         description: descValue,
       };
-      alert(newAccommodation);
       onAdd(newAccommodation);
     }
   };
