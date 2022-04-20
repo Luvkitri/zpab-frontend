@@ -4,6 +4,7 @@ export interface UserDataProps {
   phoneNumber?: string;
   email?: string;
   admin?: boolean;
+  password?: string;
 }
 
 export interface SelectedUserProps {
@@ -15,5 +16,5 @@ export interface SelectedUserProps {
 }
 
 export interface ResponseUserDataProps {
-  data: Array<UserDataProps>;
+  data: UserDataProps;
 }

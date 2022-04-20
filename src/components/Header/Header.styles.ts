@@ -9,6 +9,9 @@ export const Wrapper = styled('div')`
   display: flex;
   flex-grow: 1;
 `;
+export const ButtonsWrapper = styled('div')`
+  display: flex;
+`;
 
 export const AppBar = styled(MuiAppBar)``;
 
