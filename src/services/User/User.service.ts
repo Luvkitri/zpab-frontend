@@ -12,13 +12,12 @@ class User {
     this.update_endpoint = `${this.endpoint}/update`;
   }
 
-
   update(id: number, user: UserDataProps) {
     return axios.put(`${this.update_endpoint}/${id}`, user);
   }
   updatePassword(id: number, newPassword: string) {
     let url = `${this.update_endpoint}/${id}`;
-    let data = { "password": newPassword };
+    let data = { password: newPassword };
     return axios.put(url, data);
   }
 
@@ -28,32 +27,41 @@ class User {
 
   register(email: string, password: string, phone: string, name: string) {
     return new Promise<string>((resolve, reject) => {
-      axios.post(`${this.endpoint}`, { "email": email, "password": password, "phone": phone, "name": name })
-        .then(response => {
+      axios
+        .post(`${this.endpoint}`, {
+          email: email,
+          password: password,
+          phone: phone,
+          name: name,
+        })
+        .then((response) => {
           if (response.status == 200) {
             resolve(response.data);
           } else {
             reject(`Register request returned status: ${response.status}`);
           }
-        }).catch(reason => {
+        })
+        .catch((reason) => {
           reject(`Register request failed: ${reason}`);
         });
-    })
+    });
   }
 
   login(email: string, password: string): Promise<any> {
     return new Promise<string>((resolve, reject) => {
-      axios.post(`${this.login_endpoint}`, { "email": email, "password": password })
-        .then(response => {
+      axios
+        .post(`${this.login_endpoint}`, { email: email, password: password })
+        .then((response) => {
           if (response.status == 200) {
             resolve(response.data);
           } else {
             reject(`Login request returned status: ${response.status}`);
           }
-        }).catch(reason => {
+        })
+        .catch((reason) => {
           reject(`Login request failed: ${reason}`);
         });
-    })
+    });
   }
 }
 

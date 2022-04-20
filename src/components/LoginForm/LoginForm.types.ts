@@ -1,3 +1,3 @@
 export interface LoginProps {
-    onLogin: (email: string, password: string) => any,
+  onLogin: (email: string, password: string) => any;
 }
