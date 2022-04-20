@@ -17,7 +17,7 @@ const Layout: FC = ({ children }) => {
             <Header />
           </Styled.HeaderWrapper>
         )}
-        {children}
+        <Styled.PageWrapper>{children}</Styled.PageWrapper>
       </Fragment>
     </Styled.Wrapper>
   );

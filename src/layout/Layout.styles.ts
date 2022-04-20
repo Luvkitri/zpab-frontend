@@ -15,3 +15,7 @@ export const HeaderWrapper = styled('div')`
   position: relative;
   width: 100%;
 `;
+
+export const PageWrapper = styled('div')`
+  margin: 64px 100px;
+`;

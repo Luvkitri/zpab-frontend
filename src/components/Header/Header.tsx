@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { Button, Typography } from '@mui/material';
-import * as Styled from './Header.styles';
+
 import { useNavigate } from 'react-router-dom';
 import {
   isSignedIn as _isSignedIn,
@@ -7,48 +8,51 @@ import {
   getUserEmail,
   onSignChange,
 } from '@utils/login';
-import { render } from 'react-dom';
-import { useState } from 'react';
+
+import * as Styled from './Header.styles';
 
 const Header = () => {
   const navigate = useNavigate();
   const [isSignedIn, setSignedIn] = useState(_isSignedIn());
+
   const updateState = () => {
     setSignedIn(_isSignedIn());
   };
+  
   onSignChange(updateState);
 
   const handleUsernameButtonClick = () => {
     navigate('/account');
   };
+
   const handleSignOutButtonClick = () => {
     signOut();
     navigate('/');
   };
-  let buttons: JSX.Element = <b></b>;
+
   const renderButtonsSignedIn = () => {
     return (
-      <Styled.ButtonsWrapper>
+      <>
         <Button color="inherit" onClick={handleUsernameButtonClick}>
           {getUserEmail()}
         </Button>
         <Button color="inherit" onClick={handleSignOutButtonClick}>
           Logout
         </Button>
-      </Styled.ButtonsWrapper>
+      </>
     );
   };
 
-  const renderuttonsAnonymous = () => {
+  const renderButtonsAnonymous = () => {
     return (
-      <Styled.ButtonsWrapper>
+      <>
         <Button color="inherit" onClick={() => navigate('/login')}>
           Login
         </Button>
         <Button color="inherit" onClick={() => navigate('/register')}>
           Register
         </Button>
-      </Styled.ButtonsWrapper>
+      </>
     );
   };
 
@@ -62,7 +66,7 @@ const Header = () => {
           <Button color="inherit" onClick={() => navigate('/')}>
             Home
           </Button>
-          {isSignedIn ? renderButtonsSignedIn() : renderuttonsAnonymous()}
+          {isSignedIn ? renderButtonsSignedIn() : renderButtonsAnonymous()}
         </Styled.Toolbar>
       </Styled.AppBar>
     </Styled.Wrapper>

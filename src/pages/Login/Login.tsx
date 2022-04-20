@@ -2,8 +2,9 @@ import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import LoginForm from '@components/LoginForm/LoginForm';
-import * as Styled from '@layout/Layout.styles';
 import { signIn } from '@utils/login';
+
+import * as Styled from './Login.styles';
 
 const Login: FC = () => {
   const navigate = useNavigate();

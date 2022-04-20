@@ -1,8 +1,10 @@
-import React, { FC, useState } from 'react';
-import { LoginProps } from './LoginForm.types';
-import * as Styled from './LoginForm.styles';
+import { FC, useState } from 'react';
+
 import InputAdornment from '@mui/material/InputAdornment';
 import * as icons from '@mui/icons-material';
+
+import { LoginProps } from './LoginForm.types';
+import * as Styled from './LoginForm.styles';
 
 const LoginForm: FC<LoginProps> = ({ onLogin }) => {
   const [emailValue, setEmail] = useState('');
