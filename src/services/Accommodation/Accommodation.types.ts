@@ -1,10 +1,10 @@
 import { UserDataProps } from '@services/User/User.types';
 
-export interface AccommodationDataProps extends UserDataProps {
-  id: number;
+export interface AccommodationDataProps {
+  id?: number;
   city: string;
   street: string;
-  user: UserDataProps;
+  user?: UserDataProps;
   beds: number;
   availableFrom: string;
   availableTo: string;
