@@ -2,7 +2,6 @@ import { FC, useEffect, useState } from 'react';
 import { Modal, Typography } from '@mui/material';
 
 import SearchBar from '@components/SearchBar/SearchBar';
-import UserService from '@services/User/User.service';
 import { SelectedUserProps, UserDataProps } from '@services/User/User.types';
 import AccommodationService from '@services/Accommodation/Accommodation.service';
 import { AccommodationDataProps } from '@services/Accommodation/Accommodation.types';
@@ -34,10 +33,10 @@ const Home: FC = () => {
     setIsModalOpen(true);
   };
 
-  const handleSearchButtonClick = async () => {
+  const handleSearchButtonClick = async (searchValue: string) => {
     try {
-      const results = await UserService.getAll();
-      setUsers(results.data);
+      const searchResults = await AccommodationService.getSearch(searchValue);
+      setAccommodations(searchResults.data);
     } catch (error) {
       console.error(error);
     }
@@ -70,14 +69,32 @@ const Home: FC = () => {
           />
         </Styled.SearchBarWrapper>
         <Styled.ResultWrapper>
-          {accommodations.map(({ city, street, user }) => (
-            <AccommodationCard
-              firstName={user.firstName}
-              city={city}
-              street={street}
-              handleDetailsButtonClick={handleDetailsButtonClick}
-            />
-          ))}
+          {accommodations.length === 0 ? (
+            <Typography variant="h5">Nothing found 😢</Typography>
+          ) : (
+            accommodations.map(
+              ({
+                city,
+                street,
+                user,
+                beds,
+                availableFrom,
+                availableTo,
+                pets,
+              }) => (
+                <AccommodationCard
+                  firstName={user.firstName}
+                  city={city}
+                  street={street}
+                  beds={beds}
+                  availableFrom={availableFrom}
+                  availableTo={availableTo}
+                  pets={pets}
+                  handleDetailsButtonClick={handleDetailsButtonClick}
+                />
+              ),
+            )
+          )}
         </Styled.ResultWrapper>
       </Styled.Wrapper>
       <Modal
