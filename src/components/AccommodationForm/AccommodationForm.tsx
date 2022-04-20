@@ -4,14 +4,19 @@ import * as Styled from './AccommodationForm.styles';
 import InputAdornment from '@mui/material/InputAdornment';
 import * as icons from '@mui/icons-material';
 import { AccommodationDataProps } from '@services/Accommodation/Accommodation.types';
+import Checkbox from '@mui/material/Checkbox/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel/FormControlLabel';
 
 const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
   const [cityValue, setCity] = useState(acc ? acc.city : '');
   const [streetValue, setStreet] = useState(acc ? acc.street : '');
   const [descValue, setDesc] = useState(acc ? acc.description : '');
+  const [bedsValue, setBeds] = useState(acc ? acc.beds : 1);
+  const [petsValue, setPets] = useState(acc ? acc.pets : false);
 
   const [cityError, setCityError] = useState(false);
   const [streetError, setStreetError] = useState(false);
+  const [bedsError, setBedsError] = useState(false);
   // const [descError, setDescError] = useState(false);
 
   const reset = () => {
@@ -41,8 +46,19 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
     }
     return good;
   };
+  const validateBeds = () => {
+    let good = true;
+    console.log({ bedsValue });
+    if (bedsValue <= 0) {
+      setBedsError(true);
+      good = false;
+    } else {
+      setBedsError(false);
+    }
+    return good;
+  };
   const validateForm = () => {
-    return validateCity() && validateStreet();
+    return validateCity() && validateStreet() && validateBeds();
   };
 
   const handleAddNew = () => {
@@ -111,6 +127,63 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
           setDesc(event.target.value.trim());
         }}
       />
+
+      <Styled.TextField
+        label="Available beds"
+        value={bedsValue}
+        error={bedsError}
+        type="number"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <icons.SingleBedSharp />
+            </InputAdornment>
+          ),
+        }}
+        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+        onBlur={validateBeds}
+        onChange={(event) => {
+          try {
+            let x: number = Number(event.target.value);
+            if (x != Number.NaN) {
+              setBeds(x);
+            }
+          } catch (error) {}
+        }}
+      />
+
+      <FormControlLabel
+        control={
+          <Checkbox
+            value={petsValue}
+            onChange={(event) => setPets(event.target.checked)}
+          />
+        }
+        label="Allow pets"
+        labelPlacement="start"
+      />
+
+      <Styled.TextField
+        id="date"
+        label="Available from"
+        type="date"
+        defaultValue="2017-05-24"
+        sx={{ width: 220 }}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+      <Styled.TextField
+        id="date"
+        label="Available to"
+        type="date"
+        defaultValue="2017-05-24"
+        sx={{ width: 220 }}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+
       <Styled.Button onClick={handleAddNew} variant="contained">
         Add
       </Styled.Button>
