@@ -1,4 +1,4 @@
 export interface SearchBarProps {
   label: string;
-  handleSearchButtonClick: () => void;
+  handleSearchButtonClick: (searchValue: string) => void;
 }

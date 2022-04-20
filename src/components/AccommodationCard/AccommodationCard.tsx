@@ -20,6 +20,10 @@ const AccommodationCard = ({
   firstName,
   city,
   street,
+  beds,
+  availableFrom,
+  availableTo,
+  pets,
   handleDetailsButtonClick = () => {},
 }: AccommodationCardProps): ReactElement => {
   return (
@@ -51,7 +55,13 @@ const AccommodationCard = ({
               Availability:
             </Typography>
             <Typography variant="subtitle2" color="text.secondary">
-              29.04.2022 - 03.05.2022
+              {availableFrom !== null
+                ? availableFrom.substring(0, availableFrom.indexOf('T'))
+                : new Date().toISOString().substring(0, 10)}{' '}
+              -{' '}
+              {availableTo !== null
+                ? availableTo.substring(0, availableTo.indexOf('T'))
+                : '%any'}
             </Typography>
             <EventAvailableIcon color="action" />
           </Styled.InfoWrapper>
@@ -68,36 +78,33 @@ const AccommodationCard = ({
             </Typography>
             <LocationOnIcon color="action" />
           </Styled.InfoWrapper>
-          {true && (
-            <Styled.InfoWrapper>
-              <Typography
-                variant="subtitle2"
-                fontWeight="bold"
-                color="text.secondary"
-              >
-                Number of beds:
-              </Typography>
-              <Typography variant="subtitle2" color="text.secondary">
-                2
-              </Typography>
-              <BedIcon color="action" />
-            </Styled.InfoWrapper>
-          )}
-          {true && (
-            <Styled.InfoWrapper>
-              <Typography
-                variant="subtitle2"
-                fontWeight="bold"
-                color="text.secondary"
-              >
-                Animals:
-              </Typography>
-              <Typography variant="subtitle2" color="text.secondary">
-                allowed | not allowed
-              </Typography>
-              <PetsIcon color="action" fontSize="small" />
-            </Styled.InfoWrapper>
-          )}
+
+          <Styled.InfoWrapper>
+            <Typography
+              variant="subtitle2"
+              fontWeight="bold"
+              color="text.secondary"
+            >
+              Number of beds:
+            </Typography>
+            <Typography variant="subtitle2" color="text.secondary">
+              {beds}
+            </Typography>
+            <BedIcon color="action" />
+          </Styled.InfoWrapper>
+          <Styled.InfoWrapper>
+            <Typography
+              variant="subtitle2"
+              fontWeight="bold"
+              color="text.secondary"
+            >
+              Animals:
+            </Typography>
+            <Typography variant="subtitle2" color="text.secondary">
+              {pets ? 'allowed' : 'not allowed'}
+            </Typography>
+            <PetsIcon color="action" fontSize="small" />
+          </Styled.InfoWrapper>
         </Styled.InfoContainer>
       </CardContent>
       <CardActions>
