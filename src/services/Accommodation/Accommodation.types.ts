@@ -5,6 +5,11 @@ export interface AccommodationDataProps extends UserDataProps {
   city: string;
   street: string;
   user: UserDataProps;
+  beds: number;
+  availableFrom: string;
+  availableTo: string;
+  pets: boolean;
+  description: string;
 }
 
 export interface ResponseAccommodationDataProps {
