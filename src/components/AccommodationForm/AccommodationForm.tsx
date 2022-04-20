@@ -14,6 +14,17 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
   const [bedsValue, setBeds] = useState(acc ? acc.beds : 1);
   const [petsValue, setPets] = useState(acc ? acc.pets : false);
 
+  let defaultFrom = new Date();
+  let defaultTo = new Date();
+  defaultTo.setMonth(defaultTo.getMonth() + 1);
+
+  const [fromValue, setFrom] = useState(
+    acc ? acc.availableFrom : defaultFrom.toISOString(),
+  );
+  const [toValue, setTo] = useState(
+    acc ? acc.availableTo : defaultTo.toISOString(),
+  );
+
   const [cityError, setCityError] = useState(false);
   const [streetError, setStreetError] = useState(false);
   const [bedsError, setBedsError] = useState(false);
@@ -152,6 +163,27 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
         }}
       />
 
+      <Styled.TextField
+        id="date"
+        label="Available from"
+        type="date"
+        value={fromValue.substring(0, 10)}
+        onChange={(event) => {
+          setFrom(new Date(event.target.value).toISOString());
+        }}
+        sx={{ width: 242 }}
+      />
+      <Styled.TextField
+        id="date"
+        label="Available to"
+        type="date"
+        value={toValue.substring(0, 10)}
+        onChange={(event) => {
+          setTo(new Date(event.target.value).toISOString());
+        }}
+        sx={{ width: 242 }}
+      />
+
       <FormControlLabel
         control={
           <Checkbox
@@ -161,27 +193,6 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
         }
         label="Allow pets"
         labelPlacement="start"
-      />
-
-      <Styled.TextField
-        id="date"
-        label="Available from"
-        type="date"
-        defaultValue="2017-05-24"
-        sx={{ width: 220 }}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
-      <Styled.TextField
-        id="date"
-        label="Available to"
-        type="date"
-        defaultValue="2017-05-24"
-        sx={{ width: 220 }}
-        InputLabelProps={{
-          shrink: true,
-        }}
       />
 
       <Styled.Button onClick={handleAddNew} variant="contained">
