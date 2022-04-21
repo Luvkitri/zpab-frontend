@@ -1,5 +1,10 @@
 import axios from '@utils/api';
-import { AccommodationDataProps, ResponseAccommodationDataProps } from './Accommodation.types';
+import {
+  AccommodationDataProps,
+  ResponseAccommodationSearchResults,
+  ResponseAccommodationDataProps,
+} from './Accommodation.types';
+
 
 class Accommodation {
   endpoint: string;
@@ -13,6 +18,13 @@ class Accommodation {
   }
   add(acc: AccommodationDataProps): Promise<{ data: AccommodationDataProps }> {
     return axios.post(`${this.endpoint}`, acc);
+  }
+
+  getSearch(
+    city: string,
+    street?: string,
+  ): Promise<ResponseAccommodationSearchResults> {
+    return axios.get(`${this.endpoint}?city=${city}`);
   }
 }
 

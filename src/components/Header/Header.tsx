@@ -18,7 +18,7 @@ const Header = () => {
   const updateState = () => {
     setSignedIn(_isSignedIn());
   };
-  
+
   onSignChange(updateState);
 
   const handleUsernameButtonClick = () => {
