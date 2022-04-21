@@ -7,7 +7,7 @@ import { UserDataProps } from '@services/User/User.types';
 
 const AccountForm: FC<AccountProps> = ({ user, onEdit, onPasswordChange }) => {
   const [passwordValue, setPassword] = useState('');
-  const [phoneValue, setPhone] = useState(user.phoneNumber);
+  const [phoneValue, setPhone] = useState(user.phoneNumber + '');
   const [nameValue, setName] = useState(user.firstName);
 
   const [passwordError, setPasswordError] = useState(false);
@@ -16,7 +16,7 @@ const AccountForm: FC<AccountProps> = ({ user, onEdit, onPasswordChange }) => {
 
   const reset = () => {
     setPassword('');
-    setPhone(user.phoneNumber);
+    setPhone(user.phoneNumber + '');
     setName(user.firstName);
   };
 
@@ -64,6 +64,7 @@ const AccountForm: FC<AccountProps> = ({ user, onEdit, onPasswordChange }) => {
 
   return (
     <Styled.Wrapper>
+      <Styled.Hr />
       <Styled.TextField
         label="Phone number"
         type="tel"

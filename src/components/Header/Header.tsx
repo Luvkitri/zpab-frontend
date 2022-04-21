@@ -25,19 +25,11 @@ const Header = () => {
     navigate('/account');
   };
 
-  const handleSignOutButtonClick = () => {
-    signOut();
-    navigate('/');
-  };
-
   const renderButtonsSignedIn = () => {
     return (
       <>
         <Button color="inherit" onClick={handleUsernameButtonClick}>
           {getUserEmail()}
-        </Button>
-        <Button color="inherit" onClick={handleSignOutButtonClick}>
-          Logout
         </Button>
       </>
     );
@@ -60,12 +52,10 @@ const Header = () => {
     <Styled.Wrapper>
       <Styled.AppBar position="fixed">
         <Styled.Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            FindYourPlace
-          </Typography>
-          <Button color="inherit" onClick={() => navigate('/')}>
-            Home
+          <Button color="inherit" onClick={() => navigate('/')} component="div">
+            <Typography variant="h6">FindYourPlace</Typography>
           </Button>
+          <Typography sx={{ flexGrow: 1 }}></Typography>
           {isSignedIn ? renderButtonsSignedIn() : renderButtonsAnonymous()}
         </Styled.Toolbar>
       </Styled.AppBar>
