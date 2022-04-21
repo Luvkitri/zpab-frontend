@@ -20,13 +20,12 @@ const AddAccommodation: FC = () => {
   const onAdd = (acc: AccommodationDataProps) => {
     console.log({ acc });
     Accommodation.add(acc)
-      .then((response) => {
+      .then((response: { data: any }) => {
         alert('Accommodation added!');
         console.log(response.data);
-        // TODO: navigate to newly created Accommodation
-        // navigate(`/accommodation/${response.data.id}`);
+        navigate(`/accommodation/${response.data.id}`);
       })
-      .catch((error) => {
+      .catch((error: any) => {
         alert(error);
       });
   };
