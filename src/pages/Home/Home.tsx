@@ -59,6 +59,10 @@ const Home: FC = () => {
   return (
     <>
       <Styled.Wrapper>
+        <Styled.BigButton className="btn-grad" variant="contained" color="info">
+          <Styled.StrongText>Help now!</Styled.StrongText>
+          Click here to add your accommodation
+        </Styled.BigButton>
         <Styled.TitleWrapper>
           <Typography variant="h5">Search for stuff 🤣</Typography>
         </Styled.TitleWrapper>

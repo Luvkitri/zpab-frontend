@@ -1,4 +1,5 @@
 import { styled } from '@mui/material/styles';
+import ButtonUnstyled from '@mui/base/ButtonUnstyled';
 
 export const Wrapper = styled('div')`
   height: 100%;
@@ -33,4 +34,11 @@ export const DetailsModalContainer = styled('div')`
   padding: 10px;
   margin: 100px auto;
   border-radius: 5px;
+`;
+export const BigButton = styled(ButtonUnstyled)`
+  height: 72px;
+  font-size: inherit;
+`;
+export const StrongText = styled('strong')`
+padding-right:0.5rem;
 `;
