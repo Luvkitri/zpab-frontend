@@ -6,26 +6,29 @@ import { AccommodationDataProps } from '@services/Accommodation/Accommodation.ty
 import { UserDataProps } from '@services/User/User.types';
 import { getUserId, isSignedIn } from '@utils/login';
 import User from '@services/User/User.service';
+import Accommodation from '@services/Accommodation/Accommodation.service';
 
 const AddAccommodation: FC = () => {
   const navigate = useNavigate();
 
-  const [user, setUser] = useState<UserDataProps>();
-
   useEffect(() => {
-    const loadData = async () => {
-      let userId = getUserId();
-      setUser((await User.get(userId)).data);
-    };
     if (!isSignedIn()) {
       navigate('/login');
-    } else {
-      loadData();
     }
   }, []);
 
   const onAdd = (acc: AccommodationDataProps) => {
     console.log({ acc });
+    Accommodation.add(acc)
+      .then((response) => {
+        alert('Accommodation added!');
+        console.log(response.data);
+        // TODO: navigate to newly created Accommodation
+        // navigate(`/accommodation/${response.data.id}`);
+      })
+      .catch((error) => {
+        alert(error);
+      });
   };
   return (
     <Styled.Wrapper>
