@@ -9,7 +9,9 @@ import FormControlLabel from '@mui/material/FormControlLabel/FormControlLabel';
 
 const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
   const [cityValue, setCity] = useState(acc ? acc.city : '');
-  const [streetValue, setStreet] = useState(acc ? acc.street : '');
+  const [streetValue, setStreet] = useState(
+    acc && acc.street ? acc.street : '',
+  );
   const [descValue, setDesc] = useState(acc ? acc.description : '');
   const [bedsValue, setBeds] = useState(acc ? acc.beds : 1);
   const [petsValue, setPets] = useState(acc ? acc.pets : false);
@@ -19,10 +21,10 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
   defaultTo.setMonth(defaultTo.getMonth() + 1);
 
   const [fromValue, setFrom] = useState(
-    acc ? acc.availableFrom : defaultFrom.toISOString(),
+    acc && acc.availableFrom ? acc.availableFrom : defaultFrom.toISOString(),
   );
   const [toValue, setTo] = useState(
-    acc ? acc.availableTo : defaultTo.toISOString(),
+    acc && acc.availableTo ? acc.availableTo : defaultTo.toISOString(),
   );
 
   const [cityError, setCityError] = useState(false);
@@ -31,7 +33,7 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
 
   const reset = () => {
     setCity(acc ? acc.city : '');
-    setStreet(acc ? acc.street : '');
+    setStreet(acc && acc.street ? acc.street : '');
     setDesc(acc ? acc.description : '');
     setBeds(1);
     setPets(false);
