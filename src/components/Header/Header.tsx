@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Button, Typography } from '@mui/material';
+import { Button, IconButton, Typography } from '@mui/material';
+import * as icons from '@mui/icons-material';
 
 import { useNavigate } from 'react-router-dom';
 import {
@@ -28,8 +29,13 @@ const Header = () => {
   const renderButtonsSignedIn = () => {
     return (
       <>
-        <Button color="inherit" onClick={handleUsernameButtonClick}>
-          {getUserEmail()}
+        <Button
+          variant="contained"
+          aria-label="account"
+          disableElevation
+          onClick={handleUsernameButtonClick}
+        >
+          <icons.AccountBox />
         </Button>
       </>
     );
