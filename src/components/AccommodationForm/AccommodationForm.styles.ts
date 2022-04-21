@@ -6,6 +6,8 @@ export const Wrapper = styled('div')`
   padding-top: 1rem;
   width: 100%;
   height: 100%;
+  max-width:300px;
+  margin:auto;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -24,7 +26,7 @@ export const Hr = styled('hr')`
 `;
 
 export const Button = styled(MuiButton)`
-  width: 210px;
+  // width: 210px;
   height: 56px;
   margin-bottom: 10px;
 `;

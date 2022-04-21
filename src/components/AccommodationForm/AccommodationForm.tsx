@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { AccommodationProps } from './AccommodationForm.types';
 import * as Styled from './AccommodationForm.styles';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -51,7 +51,7 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
   };
   const validateStreet = () => {
     let good = true;
-    let matches = streetValue.match('[A-z0-9.\\/-]{3,}');
+    let matches = streetValue.match('[A-z0-9.\\/-]{0,}');
     if (!matches || matches[0] != streetValue) {
       setStreetError(true);
       good = false;
@@ -92,6 +92,9 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
   return (
     <Styled.Wrapper>
       <Styled.TextField
+        fullWidth
+        autoFocus
+        color="primary"
         label="City"
         placeholder="Lodz"
         value={cityValue}
@@ -110,6 +113,9 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
         }}
       />
       <Styled.TextField
+        fullWidth
+        helperText="(It is not necessary)"
+        color="info"
         label="Street"
         value={streetValue}
         error={streetError}
@@ -126,8 +132,11 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
         }}
       />
       <Styled.TextField
+        fullWidth
+        minRows={2}
         label="Description"
         value={descValue}
+        multiline
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -136,11 +145,12 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
           ),
         }}
         onChange={(event) => {
-          setDesc(event.target.value.trim());
+          setDesc(event.target.value);
         }}
       />
 
       <Styled.TextField
+        fullWidth
         label="Available beds"
         value={bedsValue}
         error={bedsError}
@@ -165,6 +175,7 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
       />
 
       <Styled.TextField
+        fullWidth
         id="date"
         label="Available from"
         type="date"
@@ -172,9 +183,9 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
         onChange={(event) => {
           setFrom(new Date(event.target.value).toISOString());
         }}
-        sx={{ width: 242 }}
       />
       <Styled.TextField
+        fullWidth
         id="date"
         label="Available to"
         type="date"
@@ -182,7 +193,6 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
         onChange={(event) => {
           setTo(new Date(event.target.value).toISOString());
         }}
-        sx={{ width: 242 }}
       />
 
       <FormControlLabel
@@ -196,10 +206,10 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
         labelPlacement="start"
       />
 
-      <Styled.Button onClick={handleAddNew} variant="contained">
+      <Styled.Button fullWidth onClick={handleAddNew} variant="contained">
         Add
       </Styled.Button>
-      <Styled.Button onClick={reset} variant="outlined">
+      <Styled.Button fullWidth onClick={reset} variant="outlined">
         Reset
       </Styled.Button>
     </Styled.Wrapper>
