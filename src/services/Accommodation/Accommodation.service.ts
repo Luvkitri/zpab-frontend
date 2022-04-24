@@ -13,6 +13,9 @@ class Accommodation {
     this.endpoint = 'accommodations';
   }
 
+  getByUserId(userId: number): Promise<ResponseAccommodationDataProps> {
+    return axios.get(`${this.endpoint}?userId=${userId}`);
+  }
   getAll(): Promise<ResponseAccommodationDataProps> {
     return axios.get(`${this.endpoint}`);
   }

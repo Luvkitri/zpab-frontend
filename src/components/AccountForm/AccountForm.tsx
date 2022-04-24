@@ -64,7 +64,6 @@ const AccountForm: FC<AccountProps> = ({ user, onEdit, onPasswordChange }) => {
 
   return (
     <Styled.Wrapper>
-      <Styled.Hr />
       <Styled.TextField
         label="Phone number"
         type="tel"

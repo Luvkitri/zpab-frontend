@@ -1,17 +1,23 @@
 import { FC } from 'react';
 import User from '@services/User/User.service';
-import * as Styled from '@layout/Layout.styles';
+import * as Styled from './Account.styles';
 import { isSignedIn, getUserId, signOut } from '@utils/login';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { UserDataProps } from '@services/User/User.types';
 import AccountForm from '@components/AccountForm';
 import { Button, Wrapper } from './Account.styles';
+import { AccommodationDataProps } from '@services/Accommodation/Accommodation.types';
+import AccommodationService from '@services/Accommodation/Accommodation.service';
+import AccommodationCard from '@components/AccommodationCard/AccommodationCard';
+import { Modal, Typography } from '@mui/material';
 
 const Account: FC = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<UserDataProps>();
-
+  const [usersAccommodations, setUsersAccommodations] = useState<
+    Array<AccommodationDataProps>
+  >([]);
   useEffect(() => {
     const loadData = async () => {
       let userId = getUserId();
@@ -48,6 +54,19 @@ const Account: FC = () => {
       });
   };
 
+  const loadUsersAccommodations = async () => {
+    try {
+      let x = await AccommodationService.getByUserId(getUserId());
+      setUsersAccommodations(x.data);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+  useEffect(() => {
+    loadUsersAccommodations();
+  }, []);
+
   return (
     <Styled.Wrapper>
       <Wrapper>
@@ -59,7 +78,8 @@ const Account: FC = () => {
           Logout
         </Button>
       </Wrapper>
-
+      <Styled.Hr />
+      <p>Modify your account:</p>
       {user && (
         <AccountForm
           onEdit={onEdit}
@@ -67,6 +87,37 @@ const Account: FC = () => {
           user={user}
         />
       )}
+      <Styled.Hr />
+      {usersAccommodations.length === 0 ? <></> : <p>Your accommodations:</p>}
+
+      <Styled.ResultWrapper>
+        {usersAccommodations.length === 0 ? (
+          <></>
+        ) : (
+          usersAccommodations.map(
+            ({
+              city,
+              street,
+              user,
+              beds,
+              availableFrom,
+              availableTo,
+              pets,
+            }) => (
+              <AccommodationCard
+                firstName={'' + user?.firstName}
+                city={city}
+                street={'' + street}
+                beds={beds}
+                availableFrom={availableFrom}
+                availableTo={availableTo}
+                pets={pets}
+                handleDetailsButtonClick={() => {}}
+              />
+            ),
+          )
+        )}
+      </Styled.ResultWrapper>
     </Styled.Wrapper>
   );
 };
