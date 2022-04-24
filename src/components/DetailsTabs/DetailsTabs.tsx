@@ -54,28 +54,32 @@ const DetailsTabs = ({
           </Styled.UserInfoContainer>
           <Styled.UserContactContainer>
             <Styled.ContactWrapper>
-              <Typography
-                variant="subtitle2"
-                fontWeight="bold"
-                color="text.secondary"
-              >
-                Phone number:
-              </Typography>
-              <Typography variant="subtitle2" color="text.secondary">
-                {phoneNumber}
-              </Typography>
+              <Styled.InfoWrapper>
+                <Typography
+                  variant="subtitle2"
+                  fontWeight="bold"
+                  color="text.secondary"
+                >
+                  Phone number:
+                </Typography>
+                <Typography variant="subtitle2" color="text.secondary">
+                  {phoneNumber}
+                </Typography>
+              </Styled.InfoWrapper>
             </Styled.ContactWrapper>
             <Styled.ContactWrapper>
-              <Typography
-                variant="subtitle2"
-                fontWeight="bold"
-                color="text.secondary"
-              >
-                Email:
-              </Typography>
-              <Typography variant="subtitle2" color="text.secondary">
-                {email}
-              </Typography>
+              <Styled.InfoWrapper>
+                <Typography
+                  variant="subtitle2"
+                  fontWeight="bold"
+                  color="text.secondary"
+                >
+                  Email:
+                </Typography>
+                <Typography variant="subtitle2" color="text.secondary">
+                  {email}
+                </Typography>
+              </Styled.InfoWrapper>
             </Styled.ContactWrapper>
           </Styled.UserContactContainer>
         </Styled.ContactTabContainer>

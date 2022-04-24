@@ -24,6 +24,8 @@ const AccommodationCard = ({
   availableFrom,
   availableTo,
   pets,
+  email,
+  phoneNumber,
   handleDetailsButtonClick = () => {},
 }: AccommodationCardProps): ReactElement => {
   return (
@@ -110,7 +112,15 @@ const AccommodationCard = ({
       <CardActions>
         <Button
           size="small"
-          onClick={() => handleDetailsButtonClick(firstName, city, street)}
+          onClick={() =>
+            handleDetailsButtonClick(
+              firstName,
+              city,
+              street,
+              email,
+              phoneNumber,
+            )
+          }
         >
           See details
         </Button>

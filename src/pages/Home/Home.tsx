@@ -31,8 +31,16 @@ const Home: FC = () => {
     firstName: string,
     city: string,
     street: string,
+    email: string,
+    phoneNumber: string,
   ) => {
-    setSelectedUser({ firstName: firstName, city: city, street: street });
+    setSelectedUser({
+      firstName,
+      city,
+      street,
+      email,
+      phoneNumber,
+    });
     setIsModalOpen(true);
   };
 
@@ -98,6 +106,8 @@ const Home: FC = () => {
                   availableFrom={availableFrom}
                   availableTo={availableTo}
                   pets={pets}
+                  email={user?.email ?? ''}
+                  phoneNumber={user?.phoneNumber ?? ''}
                   handleDetailsButtonClick={handleDetailsButtonClick}
                 />
               ),
