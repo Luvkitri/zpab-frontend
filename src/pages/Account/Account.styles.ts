@@ -17,3 +17,15 @@ export const Wrapper = styled('div')`
   justify-content: center;
   align-items: center;
 `;
+export const ResultWrapper = styled('div')`
+  width: 60%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+`;
+export const Hr = styled('hr')`
+  width: 300px;
+  opacity: 0.5;
+`;
