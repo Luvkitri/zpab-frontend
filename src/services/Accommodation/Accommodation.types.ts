@@ -24,6 +24,9 @@ export interface AccommodationSearchResults {
 export interface ResponseAccommodationDataProps {
   data: Array<AccommodationDataProps>;
 }
+export interface ResponseSingleAccommodationDataProps {
+  data: AccommodationDataProps;
+}
 
 export interface ResponseAccommodationSearchResults {
   data: Array<AccommodationSearchResults>;
