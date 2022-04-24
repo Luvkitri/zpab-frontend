@@ -9,8 +9,11 @@ import { AccommodationDataProps } from '@services/Accommodation/Accommodation.ty
 import * as Styled from './Home.styles';
 import AccommodationCard from '@components/AccommodationCard/AccommodationCard';
 import DetailsTabs from '@components/DetailsTabs';
+import { useNavigate } from 'react-router-dom';
 
 const Home: FC = () => {
+  const navigate = useNavigate();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<SelectedUserProps | null>(
     null,
@@ -59,7 +62,12 @@ const Home: FC = () => {
   return (
     <>
       <Styled.Wrapper>
-        <Styled.BigButton className="btn-grad" variant="contained" color="info">
+        <Styled.BigButton
+          className="btn-grad"
+          variant="contained"
+          color="info"
+          onClick={() => navigate('/add')}
+        >
           <Styled.StrongText>Help now!</Styled.StrongText>
           Click here to add your accommodation
         </Styled.BigButton>
