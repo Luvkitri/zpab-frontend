@@ -85,19 +85,15 @@ const Home: FC = () => {
             <Typography variant="h5">Nothing found 😢</Typography>
           ) : (
             accommodations.map(
-              ({
-                city,
-                street,
-                user,
-                beds,
-                availableFrom,
-                availableTo,
-                pets,
-              }) => (
+              (
+                { city, street, user, beds, availableFrom, availableTo, pets },
+                index,
+              ) => (
                 <AccommodationCard
-                  firstName={user.firstName}
+                  key={`accommodation-${index.toString()}`}
+                  firstName={user?.firstName ?? ''}
                   city={city}
-                  street={street}
+                  street={street ?? ''}
                   beds={beds}
                   availableFrom={availableFrom}
                   availableTo={availableTo}
