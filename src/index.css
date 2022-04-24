@@ -7,7 +7,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
@@ -15,4 +16,29 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.btn-grad {
+  background-image: linear-gradient(to right, #1a76d2 0%, #e9c11e 51%, #1a76d2 100%)
+}
+
+.btn-grad {
+  border: none;
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
+
+.btn-grad:hover {
+  background-position: right center;
+  /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
 }

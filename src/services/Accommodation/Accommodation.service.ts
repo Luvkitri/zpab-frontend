@@ -1,9 +1,11 @@
 import axios from '@utils/api';
 import {
+  AccommodationDataProps,
   ResponseAccommodationSearchResults,
   ResponseSingleAccommodationDataProps,
   ResponseAccommodationDataProps
 } from './Accommodation.types';
+
 
 class Accommodation {
   endpoint: string;
@@ -14,6 +16,9 @@ class Accommodation {
 
   getAll(): Promise<ResponseAccommodationDataProps> {
     return axios.get(`${this.endpoint}`);
+  }
+  add(acc: AccommodationDataProps): Promise<{ data: AccommodationDataProps }> {
+    return axios.post(`${this.endpoint}`, acc);
   }
 
   get(id: number): Promise<ResponseSingleAccommodationDataProps> {
