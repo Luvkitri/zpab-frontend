@@ -24,7 +24,7 @@ class Accommodation {
     city: string,
     street?: string,
   ): Promise<ResponseAccommodationSearchResults> {
-    return axios.get(`${this.endpoint} ? city = ${city}`);
+    return axios.get(`${this.endpoint}?city=${city}`);
   }
 }
 
