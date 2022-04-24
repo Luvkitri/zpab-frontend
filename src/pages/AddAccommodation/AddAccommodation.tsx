@@ -23,7 +23,7 @@ const AddAccommodation: FC = () => {
       .then((response: { data: any }) => {
         alert('Accommodation added!');
         console.log(response.data);
-        navigate(`/accommodation/${response.data.id}`);
+        navigate(`/accommodation?id=${response.data.id}`);
       })
       .catch((error: any) => {
         alert(error);
