@@ -1,14 +1,21 @@
 import { FC, useState } from 'react';
-import { AccommodationProps } from './AccommodationForm.types';
-import * as Styled from './AccommodationForm.styles';
+
 import InputAdornment from '@mui/material/InputAdornment';
-import * as icons from '@mui/icons-material';
-import { AccommodationDataProps } from '@services/Accommodation/Accommodation.types';
+
 import Checkbox from '@mui/material/Checkbox/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel/FormControlLabel';
+import { Autocomplete } from '@mui/material';
+import * as icons from '@mui/icons-material';
+
+import { CITIES } from '@components/SearchBar/SearchBar.constants';
+import { AccommodationDataProps } from '@services/Accommodation/Accommodation.types';
+
+import { AccommodationProps } from './AccommodationForm.types';
+import * as Styled from './AccommodationForm.styles';
 
 const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
-  const [cityValue, setCity] = useState(acc ? acc.city : '');
+  const [cityValue, setCityValue] = useState(acc ? acc.city : '');
+  const [cityInputValue, setCityInputValue] = useState(acc ? acc.city : '');
   const [streetValue, setStreet] = useState(
     acc && acc.street ? acc.street : '',
   );
@@ -27,12 +34,10 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
     acc && acc.availableTo ? acc.availableTo : defaultTo.toISOString(),
   );
 
-  const [cityError, setCityError] = useState(false);
-  const [streetError, setStreetError] = useState(false);
   const [bedsError, setBedsError] = useState(false);
 
   const reset = () => {
-    setCity(acc ? acc.city : '');
+    setCityValue(acc ? acc.city : '');
     setStreet(acc && acc.street ? acc.street : '');
     setDesc(acc ? acc.description : '');
     setBeds(1);
@@ -40,28 +45,7 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
     setFrom(defaultFrom.toISOString());
     setTo(defaultTo.toISOString());
   };
-  const validateCity = () => {
-    let good = true;
-    let matches = cityValue.match('[A-z]{3,}');
-    if (!matches || matches[0] != cityValue) {
-      setCityError(true);
-      good = false;
-    } else {
-      setCityError(false);
-    }
-    return good;
-  };
-  const validateStreet = () => {
-    let good = true;
-    let matches = streetValue.match('[A-z0-9.\\/-]{0,}');
-    if (!matches || matches[0] != streetValue) {
-      setStreetError(true);
-      good = false;
-    } else {
-      setStreetError(false);
-    }
-    return good;
-  };
+
   const validateBeds = () => {
     let good = true;
     if (bedsValue <= 0) {
@@ -73,13 +57,13 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
     return good;
   };
   const validateForm = () => {
-    return validateCity() && validateStreet() && validateBeds();
+    return validateBeds();
   };
 
   const handleAddNew = () => {
     if (validateForm()) {
       let newAccommodation: AccommodationDataProps = {
-        city: cityValue,
+        city: cityInputValue,
         street: streetValue,
         beds: bedsValue,
         availableFrom: fromValue,
@@ -93,26 +77,38 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
 
   return (
     <Styled.Wrapper>
-      <Styled.TextField
+      <Autocomplete
+        id="combo-box-city-selector"
         fullWidth
-        autoFocus
-        color="primary"
-        label="City"
-        placeholder="Lodz"
+        disablePortal
+        options={CITIES}
         value={cityValue}
-        error={cityError}
-        required
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <icons.LocationCity />
-            </InputAdornment>
-          ),
+        onChange={(_: any, newValue: string | null) => {
+          setCityValue(newValue !== null ? newValue.trim() : '');
         }}
-        onBlur={validateCity}
-        onChange={(event) => {
-          setCity(event.target.value.trim());
+        inputValue={cityInputValue}
+        onInputChange={(_, newInputValue) => {
+          setCityInputValue(newInputValue);
         }}
+        renderInput={(params) => (
+          <Styled.TextField
+            {...params}
+            fullWidth
+            autoFocus
+            color="primary"
+            label="City"
+            placeholder="Łódź"
+            required
+            InputProps={{
+              ...params.InputProps,
+              startAdornment: (
+                <InputAdornment position="start">
+                  <icons.LocationCity />
+                </InputAdornment>
+              ),
+            }}
+          />
+        )}
       />
       <Styled.TextField
         fullWidth
@@ -120,7 +116,6 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
         color="info"
         label="Street"
         value={streetValue}
-        error={streetError}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -128,7 +123,6 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
             </InputAdornment>
           ),
         }}
-        onBlur={validateStreet}
         onChange={(event) => {
           setStreet(event.target.value.trim());
         }}
