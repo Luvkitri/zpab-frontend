@@ -2,7 +2,8 @@ import axios from '@utils/api';
 import {
   AccommodationDataProps,
   ResponseAccommodationSearchResults,
-  ResponseAccommodationDataProps,
+  ResponseSingleAccommodationDataProps,
+  ResponseAccommodationDataProps
 } from './Accommodation.types';
 
 
@@ -18,6 +19,10 @@ class Accommodation {
   }
   add(acc: AccommodationDataProps): Promise<{ data: AccommodationDataProps }> {
     return axios.post(`${this.endpoint}`, acc);
+  }
+
+  get(id: number): Promise<ResponseSingleAccommodationDataProps> {
+    return axios.get(`${this.endpoint}/${id}`);
   }
 
   getSearch(

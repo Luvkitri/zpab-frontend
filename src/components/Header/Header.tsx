@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Button, Typography } from '@mui/material';
+import { Button, IconButton, Typography } from '@mui/material';
+import * as icons from '@mui/icons-material';
 
 import { useNavigate } from 'react-router-dom';
 import {
@@ -25,19 +26,16 @@ const Header = () => {
     navigate('/account');
   };
 
-  const handleSignOutButtonClick = () => {
-    signOut();
-    navigate('/');
-  };
-
   const renderButtonsSignedIn = () => {
     return (
       <>
-        <Button color="inherit" onClick={handleUsernameButtonClick}>
-          {getUserEmail()}
-        </Button>
-        <Button color="inherit" onClick={handleSignOutButtonClick}>
-          Logout
+        <Button
+          variant="contained"
+          aria-label="account"
+          disableElevation
+          onClick={handleUsernameButtonClick}
+        >
+          <icons.AccountBox />
         </Button>
       </>
     );
@@ -60,12 +58,10 @@ const Header = () => {
     <Styled.Wrapper>
       <Styled.AppBar position="fixed">
         <Styled.Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            FindYourPlace
-          </Typography>
-          <Button color="inherit" onClick={() => navigate('/')}>
-            Home
+          <Button color="inherit" onClick={() => navigate('/')} component="div">
+            <Typography variant="h6">FindYourPlace</Typography>
           </Button>
+          <Typography sx={{ flexGrow: 1 }}></Typography>
           {isSignedIn ? renderButtonsSignedIn() : renderButtonsAnonymous()}
         </Styled.Toolbar>
       </Styled.AppBar>

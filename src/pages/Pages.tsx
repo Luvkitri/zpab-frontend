@@ -6,6 +6,7 @@ import Login from '@pages/Login';
 import Register from '@pages/Register';
 import Account from '@pages/Account';
 import AddAccommodation from './AddAccommodation';
+import AccommodationView from './AccommodationView';
 
 // TODO fix lazy loading???
 // const HomePage = lazy(() => import("@pages/Home/Home"));
@@ -18,6 +19,7 @@ const RouterComponent: FC = () => (
     <Route path={'/register'} element={<Register />} />
     <Route path={'/account'} element={<Account />} />
     <Route path={'/add'} element={<AddAccommodation />} />
+    <Route path={'/accommodation'} element={<AccommodationView />} />
   </Routes>
 );
 

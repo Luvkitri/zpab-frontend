@@ -1,11 +1,12 @@
 import { FC } from 'react';
 import User from '@services/User/User.service';
 import * as Styled from '@layout/Layout.styles';
-import { isSignedIn, getUserId } from '@utils/login';
+import { isSignedIn, getUserId, signOut } from '@utils/login';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { UserDataProps } from '@services/User/User.types';
 import AccountForm from '@components/AccountForm';
+import { Button, Wrapper } from './Account.styles';
 
 const Account: FC = () => {
   const navigate = useNavigate();
@@ -22,6 +23,11 @@ const Account: FC = () => {
       loadData();
     }
   }, []);
+
+  const handleSignOutButtonClick = () => {
+    signOut();
+    navigate('/');
+  };
 
   const onEdit = (user: UserDataProps) => {
     User.update(getUserId(), user)
@@ -44,6 +50,16 @@ const Account: FC = () => {
 
   return (
     <Styled.Wrapper>
+      <Wrapper>
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={handleSignOutButtonClick}
+        >
+          Logout
+        </Button>
+      </Wrapper>
+
       {user && (
         <AccountForm
           onEdit={onEdit}
