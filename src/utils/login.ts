@@ -44,6 +44,16 @@ export const isSignedIn = () => {
   }
 };
 
+export const isAdmin = () => {
+  let token: string | null = localStorage.getItem(LOCAL_STORAGE_JWT_KEY);
+  if (token) {
+    let sth = jwt_decode<Jwt>(token);
+    return sth.is_admin;
+  } else {
+    throw 'Not logged in';
+  }
+}
+
 export const getUserEmail = (): string => {
   let token: string | null = localStorage.getItem(LOCAL_STORAGE_JWT_KEY);
   if (token) {

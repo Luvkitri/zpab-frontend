@@ -10,9 +10,12 @@ import * as Styled from './Home.styles';
 import AccommodationCard from '@components/AccommodationCard/AccommodationCard';
 import DetailsTabs from '@components/DetailsTabs';
 import { useNavigate } from 'react-router-dom';
+import { isAdmin as _isAdmin } from '@utils/login';
 
 const Home: FC = () => {
   const navigate = useNavigate();
+
+  let isAdmin = false;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<SelectedUserProps | null>(
@@ -57,6 +60,12 @@ const Home: FC = () => {
   };
 
   useEffect(() => {
+    try {
+      isAdmin = _isAdmin();
+    } catch (error) {
+      isAdmin = false;
+    }
+
     const initData = async () => {
       try {
         const accommodationsResults = await AccommodationService.getAll();
@@ -69,6 +78,17 @@ const Home: FC = () => {
 
     // initData();
   }, []);
+
+  const onDeleteAccommodation = (id: number) => {
+    if (isAdmin) {
+      AccommodationService.delete(id)
+        .then(() => {
+          alert('Accommodation deleted.');
+          setAccommodations(accommodations.filter((acc) => acc.id != id));
+        })
+        .catch(alert);
+    }
+  };
 
   return (
     <>
@@ -100,6 +120,7 @@ const Home: FC = () => {
             accommodations.map(
               (
                 {
+                  id,
                   city,
                   street,
                   user,
@@ -112,6 +133,13 @@ const Home: FC = () => {
                 index,
               ) => (
                 <AccommodationCard
+                  onDelete={
+                    isAdmin
+                      ? () => {
+                          if (id != undefined) onDeleteAccommodation(id);
+                        }
+                      : undefined
+                  }
                   key={`accommodation-${index.toString()}`}
                   firstName={user?.firstName ?? ''}
                   city={city}
