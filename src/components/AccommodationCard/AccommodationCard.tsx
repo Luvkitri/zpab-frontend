@@ -27,6 +27,8 @@ const AccommodationCard = ({
   email,
   phoneNumber,
   description,
+  onEdit,
+  onDelete,
   handleDetailsButtonClick = () => {},
 }: AccommodationCardProps): ReactElement => {
   return (
@@ -124,6 +126,25 @@ const AccommodationCard = ({
           See details
         </Button>
         <Button size="small">Share</Button>
+        {onEdit != undefined ? (
+          <Button
+            size="small"
+            onClick={() => {
+              onEdit();
+            }}
+          >
+            Edit
+          </Button>
+        ) : (
+          <></>
+        )}
+        {onDelete != undefined ? (
+          <Button size="small" onClick={() => onDelete}>
+            Delete
+          </Button>
+        ) : (
+          <></>
+        )}
       </CardActions>
     </Card>
   );

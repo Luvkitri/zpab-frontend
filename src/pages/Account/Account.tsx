@@ -94,32 +94,24 @@ const Account: FC = () => {
         {usersAccommodations.length === 0 ? (
           <></>
         ) : (
-          usersAccommodations.map(
-            ({
-              city,
-              street,
-              user,
-              beds,
-              availableFrom,
-              availableTo,
-              pets,
-              description,
-            }) => (
-              <AccommodationCard
-                firstName={user?.firstName ?? ''}
-                city={city}
-                street={'' + street}
-                beds={beds}
-                availableFrom={availableFrom}
-                availableTo={availableTo}
-                pets={pets}
-                email={user?.email ?? ''}
-                phoneNumber={user?.phoneNumber ?? ''}
-                description={description}
-                handleDetailsButtonClick={() => {}}
-              />
-            ),
-          )
+          usersAccommodations.map((acc) => (
+            <AccommodationCard
+              onEdit={() => navigate(`/add?id=${acc.id}`)}
+              onDelete={console.log}
+              key={acc.id}
+              firstName={user?.firstName ?? ''}
+              city={acc.city}
+              street={'' + acc.street}
+              beds={acc.beds}
+              availableFrom={acc.availableFrom}
+              availableTo={acc.availableTo}
+              pets={acc.pets}
+              email={user?.email ?? ''}
+              phoneNumber={user?.phoneNumber ?? ''}
+              description={acc.description}
+              handleDetailsButtonClick={() => {}}
+            />
+          ))
         )}
       </Styled.ResultWrapper>
     </Styled.Wrapper>

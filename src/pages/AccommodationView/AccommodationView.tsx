@@ -32,15 +32,17 @@ const AccommodationView: FC = () => {
         <p>{`${errorMsg}`}</p>
       ) : (
         <AccommodationCard
-          firstName={acc.user.firstName}
+          firstName={'' + acc.user?.firstName}
           city={acc.city}
-          street={acc.street}
+          street={'' + acc.street}
           beds={acc.beds}
           availableFrom={acc.availableFrom}
           availableTo={acc.availableTo}
           pets={acc.pets}
           description={acc.description}
           handleDetailsButtonClick={handleDetailsButtonClick}
+          email={''}
+          phoneNumber={''}
         />
       )}
     </Styled.Wrapper>
