@@ -4,6 +4,7 @@ import {
   ResponseAccommodationSearchResults,
   ResponseSingleAccommodationDataProps,
   ResponseAccommodationDataProps,
+  PaginationResponse,
 } from './Accommodation.types';
 
 class Accommodation {
@@ -16,8 +17,8 @@ class Accommodation {
   getByUserId(userId: number): Promise<ResponseAccommodationDataProps> {
     return axios.get(`${this.endpoint}?userId=${userId}`);
   }
-  getAll(): Promise<ResponseAccommodationDataProps> {
-    return axios.get(`${this.endpoint}`);
+  getAll(): Promise<ResponseAccommodationSearchResults> {
+    return axios.get(`${this.endpoint}`)
   }
   update(acc: AccommodationDataProps): Promise<{ data: AccommodationDataProps }> {
     return axios.put(`${this.endpoint}/${acc.id}`, acc);
@@ -35,9 +36,9 @@ class Accommodation {
 
   getSearch(
     city: string,
-    street?: string,
+    pageNumber?: number,
   ): Promise<ResponseAccommodationSearchResults> {
-    return axios.get(`${this.endpoint}?city=${city}`);
+    return axios.get(`${this.endpoint}?city=${city}&page=${pageNumber}`);
   }
 }
 
