@@ -139,7 +139,7 @@ const AccommodationCard = ({
           <></>
         )}
         {onDelete != undefined ? (
-          <Button size="small" onClick={() => onDelete}>
+          <Button size="small" onClick={() => onDelete()}>
             Delete
           </Button>
         ) : (

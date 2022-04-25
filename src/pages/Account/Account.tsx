@@ -10,7 +10,7 @@ import { Button, Wrapper } from './Account.styles';
 import { AccommodationDataProps } from '@services/Accommodation/Accommodation.types';
 import AccommodationService from '@services/Accommodation/Accommodation.service';
 import AccommodationCard from '@components/AccommodationCard/AccommodationCard';
-import { Modal, Typography } from '@mui/material';
+import Accommodation from '@services/Accommodation/Accommodation.service';
 
 const Account: FC = () => {
   const navigate = useNavigate();
@@ -67,6 +67,13 @@ const Account: FC = () => {
     loadUsersAccommodations();
   }, []);
 
+  const onDeleteAccommodation = (id: number) => {
+    Accommodation.delete(id).then(() => {
+      alert('Accommodation deleted.');
+      loadUsersAccommodations();
+    });
+  };
+
   return (
     <Styled.Wrapper>
       <Wrapper>
@@ -97,7 +104,9 @@ const Account: FC = () => {
           usersAccommodations.map((acc) => (
             <AccommodationCard
               onEdit={() => navigate(`/add?id=${acc.id}`)}
-              onDelete={console.log}
+              onDelete={() => {
+                if (acc.id != undefined) onDeleteAccommodation(acc.id);
+              }}
               key={acc.id}
               firstName={user?.firstName ?? ''}
               city={acc.city}
