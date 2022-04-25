@@ -28,3 +28,10 @@ export const UserContactContainer = styled('div')`
 export const ContactWrapper = styled('div')`
   display: flex;
 `;
+
+export const InfoWrapper = styled('div')`
+  display: flex;
+  & > h6 {
+    margin-right: 4px;
+  }
+`;

@@ -103,15 +103,19 @@ const Account: FC = () => {
               availableFrom,
               availableTo,
               pets,
+              description,
             }) => (
               <AccommodationCard
-                firstName={'' + user?.firstName}
+                firstName={user?.firstName ?? ''}
                 city={city}
                 street={'' + street}
                 beds={beds}
                 availableFrom={availableFrom}
                 availableTo={availableTo}
                 pets={pets}
+                email={user?.email ?? ''}
+                phoneNumber={user?.phoneNumber ?? ''}
+                description={description}
                 handleDetailsButtonClick={() => {}}
               />
             ),

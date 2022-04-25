@@ -31,8 +31,16 @@ const Home: FC = () => {
     firstName: string,
     city: string,
     street: string,
+    email: string,
+    phoneNumber: string,
   ) => {
-    setSelectedUser({ firstName: firstName, city: city, street: street });
+    setSelectedUser({
+      firstName,
+      city,
+      street,
+      email,
+      phoneNumber,
+    });
     setIsModalOpen(true);
   };
 
@@ -72,11 +80,11 @@ const Home: FC = () => {
           Click here to add your accommodation
         </Styled.BigButton>
         <Styled.TitleWrapper>
-          <Typography variant="h5">Search for stuff 🤣</Typography>
+          <Typography variant="h5">Find your place</Typography>
         </Styled.TitleWrapper>
         <Styled.SearchBarWrapper>
           <SearchBar
-            label="Search for a City/Place"
+            label="Search for a City"
             handleSearchButtonClick={handleSearchButtonClick}
           />
         </Styled.SearchBarWrapper>
@@ -85,23 +93,31 @@ const Home: FC = () => {
             <Typography variant="h5">Nothing found 😢</Typography>
           ) : (
             accommodations.map(
-              ({
-                city,
-                street,
-                user,
-                beds,
-                availableFrom,
-                availableTo,
-                pets,
-              }) => (
+              (
+                {
+                  city,
+                  street,
+                  user,
+                  beds,
+                  availableFrom,
+                  availableTo,
+                  pets,
+                  description,
+                },
+                index,
+              ) => (
                 <AccommodationCard
-                  firstName={user.firstName}
+                  key={`accommodation-${index.toString()}`}
+                  firstName={user?.firstName ?? ''}
                   city={city}
-                  street={street}
+                  street={street ?? ''}
                   beds={beds}
                   availableFrom={availableFrom}
                   availableTo={availableTo}
                   pets={pets}
+                  email={user?.email ?? ''}
+                  phoneNumber={user?.phoneNumber ?? ''}
+                  description={description}
                   handleDetailsButtonClick={handleDetailsButtonClick}
                 />
               ),

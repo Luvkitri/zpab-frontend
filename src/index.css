@@ -19,7 +19,12 @@ code {
 }
 
 .btn-grad {
-  background-image: linear-gradient(to right, #1a76d2 0%, #e9c11e 51%, #1a76d2 100%)
+  background-image: linear-gradient(
+    to right,
+    #1a76d2 0%,
+    #e9c11e 51%,
+    #1a76d2 100%
+  );
 }
 
 .btn-grad {

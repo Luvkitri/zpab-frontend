@@ -3,9 +3,8 @@ import {
   AccommodationDataProps,
   ResponseAccommodationSearchResults,
   ResponseSingleAccommodationDataProps,
-  ResponseAccommodationDataProps
+  ResponseAccommodationDataProps,
 } from './Accommodation.types';
-
 
 class Accommodation {
   endpoint: string;

@@ -11,7 +11,7 @@ export const Wrapper = styled('div')`
 `;
 
 export const TitleWrapper = styled('div')`
-  margin: 0 0 24px 0;
+  margin: 24px 0 24px 0;
 `;
 
 export const SearchBarWrapper = styled('div')`
@@ -40,5 +40,5 @@ export const BigButton = styled(ButtonUnstyled)`
   font-size: inherit;
 `;
 export const StrongText = styled('strong')`
-padding-right:0.5rem;
+  padding-right: 0.5rem;
 `;

@@ -16,6 +16,7 @@ export interface AccommodationSearchResults {
   id: number;
   city: string;
   street: string;
+  description: string;
   beds: number;
   availableFrom: string | null;
   availableTo: string | null;

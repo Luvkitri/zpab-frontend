@@ -37,7 +37,7 @@ export const InfoWrapper = styled('div')`
   gap: 4px;
   height: 30px;
 
-  & :first-child {
+  & > span :first-child {
     margin-right: 4px;
   }
 `;
