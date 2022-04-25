@@ -23,6 +23,8 @@ const Home: FC = () => {
     Array<AccommodationDataProps>
   >([]);
 
+  const [msg, setMsg] = useState('Select city ^');
+
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
@@ -47,6 +49,7 @@ const Home: FC = () => {
   const handleSearchButtonClick = async (searchValue: string) => {
     try {
       const searchResults = await AccommodationService.getSearch(searchValue);
+      setMsg(`Nothing in ${searchValue} 🥺`);
       setAccommodations(searchResults.data);
     } catch (error) {
       console.error(error);
@@ -64,7 +67,7 @@ const Home: FC = () => {
       }
     };
 
-    initData();
+    // initData();
   }, []);
 
   return (
@@ -90,7 +93,9 @@ const Home: FC = () => {
         </Styled.SearchBarWrapper>
         <Styled.ResultWrapper>
           {accommodations.length === 0 ? (
-            <Typography variant="h5">Nothing found 😢</Typography>
+            <>
+              <Typography variant="h5">{msg}</Typography>
+            </>
           ) : (
             accommodations.map(
               (
