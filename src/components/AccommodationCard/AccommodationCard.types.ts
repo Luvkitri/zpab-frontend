@@ -8,6 +8,7 @@ export interface AccommodationCardProps {
   pets: boolean;
   email: string;
   phoneNumber: string;
+  description: string;
   handleDetailsButtonClick?: (
     firstName: string,
     city: string,

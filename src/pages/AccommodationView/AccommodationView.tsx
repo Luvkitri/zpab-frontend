@@ -39,6 +39,7 @@ const AccommodationView: FC = () => {
           availableFrom={acc.availableFrom}
           availableTo={acc.availableTo}
           pets={acc.pets}
+          description={acc.description}
           handleDetailsButtonClick={handleDetailsButtonClick}
         />
       )}

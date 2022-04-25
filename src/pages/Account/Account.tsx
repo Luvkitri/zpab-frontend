@@ -103,6 +103,7 @@ const Account: FC = () => {
               availableFrom,
               availableTo,
               pets,
+              description,
             }) => (
               <AccommodationCard
                 firstName={user?.firstName ?? ''}
@@ -114,6 +115,7 @@ const Account: FC = () => {
                 pets={pets}
                 email={user?.email ?? ''}
                 phoneNumber={user?.phoneNumber ?? ''}
+                description={description}
                 handleDetailsButtonClick={() => {}}
               />
             ),

@@ -94,7 +94,16 @@ const Home: FC = () => {
           ) : (
             accommodations.map(
               (
-                { city, street, user, beds, availableFrom, availableTo, pets },
+                {
+                  city,
+                  street,
+                  user,
+                  beds,
+                  availableFrom,
+                  availableTo,
+                  pets,
+                  description,
+                },
                 index,
               ) => (
                 <AccommodationCard
@@ -108,6 +117,7 @@ const Home: FC = () => {
                   pets={pets}
                   email={user?.email ?? ''}
                   phoneNumber={user?.phoneNumber ?? ''}
+                  description={description}
                   handleDetailsButtonClick={handleDetailsButtonClick}
                 />
               ),
