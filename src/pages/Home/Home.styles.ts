@@ -1,5 +1,6 @@
 import { styled } from '@mui/material/styles';
 import ButtonUnstyled from '@mui/base/ButtonUnstyled';
+import { Button as MuiButton, TextField as MuiTextField } from '@mui/material';
 
 export const Wrapper = styled('div')`
   height: 100%;
@@ -41,4 +42,9 @@ export const BigButton = styled(ButtonUnstyled)`
 `;
 export const StrongText = styled('strong')`
   padding-right: 0.5rem;
+`;
+
+export const PaginationWrapper = styled('div')`
+`;
+export const PaginationButton = styled(MuiButton)`
 `;

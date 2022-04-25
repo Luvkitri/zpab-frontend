@@ -4,7 +4,10 @@ import { Modal, Typography } from '@mui/material';
 import SearchBar from '@components/SearchBar/SearchBar';
 import { SelectedUserProps, UserDataProps } from '@services/User/User.types';
 import AccommodationService from '@services/Accommodation/Accommodation.service';
-import { AccommodationDataProps } from '@services/Accommodation/Accommodation.types';
+import {
+  AccommodationDataProps,
+  PaginationResponse,
+} from '@services/Accommodation/Accommodation.types';
 
 import * as Styled from './Home.styles';
 import AccommodationCard from '@components/AccommodationCard/AccommodationCard';
@@ -18,10 +21,10 @@ const Home: FC = () => {
   const [selectedUser, setSelectedUser] = useState<SelectedUserProps | null>(
     null,
   );
-  const [users, setUsers] = useState<Array<UserDataProps>>([]);
-  const [accommodations, setAccommodations] = useState<
-    Array<AccommodationDataProps>
-  >([]);
+  const [searchedString, setSearchedString] = useState<string | null>(null);
+  const [accommodations, setAccommodations] = useState<PaginationResponse>({
+    content: [],
+  });
 
   const [msg, setMsg] = useState('Select city ^');
 
@@ -47,12 +50,25 @@ const Home: FC = () => {
   };
 
   const handleSearchButtonClick = async (searchValue: string) => {
-    try {
-      const searchResults = await AccommodationService.getSearch(searchValue);
-      setMsg(`Nothing in ${searchValue} 🥺`);
-      setAccommodations(searchResults.data);
-    } catch (error) {
-      console.error(error);
+    loadAccommodationsPage(searchValue, 0);
+    setSearchedString(searchValue);
+  };
+
+  const loadAccommodationsPage = async (
+    city: string | null,
+    pageNumber = 0,
+  ) => {
+    if (city) {
+      try {
+        const searchResults = await AccommodationService.getSearch(
+          city,
+          pageNumber,
+        );
+        console.log({ searchResults });
+        setAccommodations(searchResults.data);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -92,12 +108,12 @@ const Home: FC = () => {
           />
         </Styled.SearchBarWrapper>
         <Styled.ResultWrapper>
-          {accommodations.length === 0 ? (
+          {accommodations.content.length === 0 ? (
             <>
               <Typography variant="h5">{msg}</Typography>
             </>
           ) : (
-            accommodations.map(
+            accommodations.content.map(
               (
                 {
                   city,
@@ -129,6 +145,32 @@ const Home: FC = () => {
             )
           )}
         </Styled.ResultWrapper>
+
+        <>
+          {accommodations?.pageable ? (
+            <Styled.PaginationWrapper>
+              {Array.from(Array(accommodations?.totalPages).keys()).map(
+                (pageNumber) => (
+                  <Styled.PaginationButton
+                    variant={
+                      pageNumber == accommodations?.pageable?.pageNumber
+                        ? 'contained'
+                        : 'outlined'
+                    }
+                    onClick={() => {
+                      loadAccommodationsPage(searchedString, pageNumber);
+                      window.scrollTo(0, 0);
+                    }}
+                  >
+                    {pageNumber + 1}
+                  </Styled.PaginationButton>
+                ),
+              )}
+            </Styled.PaginationWrapper>
+          ) : (
+            <></>
+          )}
+        </>
       </Styled.Wrapper>
       <Modal
         open={isModalOpen}
