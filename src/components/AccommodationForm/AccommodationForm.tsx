@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import InputAdornment from '@mui/material/InputAdornment';
 
@@ -13,17 +13,17 @@ import { AccommodationDataProps } from '@services/Accommodation/Accommodation.ty
 import { AccommodationProps } from './AccommodationForm.types';
 import * as Styled from './AccommodationForm.styles';
 
-const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
+const AccommodationForm: FC<AccommodationProps> = ({ acc, onSave }) => {
+  console.log({ acc });
+
   const [cityValue, setCityValue] = useState(acc ? acc.city : '');
   const [cityInputValue, setCityInputValue] = useState(acc ? acc.city : '');
-  const [streetValue, setStreet] = useState(
-    acc && acc.street ? acc.street : '',
-  );
+  const [streetValue, setStreet] = useState(acc ? '' + acc.street : '');
   const [descValue, setDesc] = useState(acc ? acc.description : '');
   const [bedsValue, setBeds] = useState(acc ? acc.beds : 1);
   const [petsValue, setPets] = useState(acc ? acc.pets : false);
 
-  let defaultFrom = new Date();
+  const defaultFrom = new Date();
   let defaultTo = new Date();
   defaultTo.setMonth(defaultTo.getMonth() + 1);
 
@@ -38,14 +38,15 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
 
   const reset = () => {
     setCityValue(acc ? acc.city : '');
-    setStreet(acc && acc.street ? acc.street : '');
+    setStreet(acc ? '' + acc.street : '');
     setDesc(acc ? acc.description : '');
-    setBeds(1);
-    setPets(false);
-    setFrom(defaultFrom.toISOString());
-    setTo(defaultTo.toISOString());
+    setBeds(acc ? acc.beds : 1);
+    setPets(acc ? acc.pets : false);
+    setFrom(
+      acc && acc.availableFrom ? acc.availableFrom : defaultFrom.toISOString(),
+    );
+    setTo(acc && acc.availableTo ? acc.availableTo : defaultTo.toISOString());
   };
-
   const validateBeds = () => {
     let good = true;
     if (bedsValue <= 0) {
@@ -59,7 +60,6 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
   const validateForm = () => {
     return validateBeds();
   };
-
   const handleAddNew = () => {
     if (validateForm()) {
       let newAccommodation: AccommodationDataProps = {
@@ -71,12 +71,22 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
         pets: petsValue,
         description: descValue,
       };
-      onAdd(newAccommodation);
+
+      onSave(newAccommodation);
     }
   };
 
+  useEffect(() => {
+    reset();
+  }, []);
+
   return (
     <Styled.Wrapper>
+      {acc ? (
+        <h3>Editing accommodation</h3>
+      ) : (
+        <h3>Creating new accommodation</h3>
+      )}
       <Autocomplete
         id="combo-box-city-selector"
         fullWidth
@@ -203,7 +213,7 @@ const AccommodationForm: FC<AccommodationProps> = ({ acc, onAdd }) => {
       />
 
       <Styled.Button fullWidth onClick={handleAddNew} variant="contained">
-        Add
+        Save
       </Styled.Button>
       <Styled.Button fullWidth onClick={reset} variant="outlined">
         Reset

@@ -10,28 +10,70 @@ import Accommodation from '@services/Accommodation/Accommodation.service';
 
 const AddAccommodation: FC = () => {
   const navigate = useNavigate();
+  const [acc, setAcc] = useState<AccommodationDataProps | null>(null);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const queryParams = new URLSearchParams(window.location.search);
+  const id = Number(queryParams.get('id'));
 
   useEffect(() => {
     if (!isSignedIn()) {
       navigate('/login');
     }
+
+    const loadData = async () => {
+      Accommodation.get(id)
+        .then((response) => {
+          setAcc(response.data);
+        })
+        .catch((error) => {
+          navigate('/');
+        });
+    };
+    if (id) {
+      loadData();
+    }
   }, []);
 
-  const onAdd = (acc: AccommodationDataProps) => {
-    console.log({ acc });
-    Accommodation.add(acc)
-      .then((response: { data: any }) => {
-        alert('Accommodation added!');
-        console.log(response.data);
-        navigate(`/accommodation?id=${response.data.id}`);
-      })
-      .catch((error: any) => {
-        alert(error);
-      });
+  const onSave = (newAcc: AccommodationDataProps) => {
+    if (id) {
+      newAcc.id = id;
+      Accommodation.update(newAcc)
+        .then((response: { data: any }) => {
+          alert('Accommodation updated!');
+          console.log(response.data);
+          navigate(`/accommodation?id=${response.data.id}`);
+        })
+        .catch((error: any) => {
+          alert(error);
+        });
+    } else {
+      Accommodation.add(newAcc)
+        .then((response: { data: any }) => {
+          alert('Accommodation added!');
+          console.log(response.data);
+          navigate(`/accommodation?id=${response.data.id}`);
+        })
+        .catch((error: any) => {
+          alert(error);
+        });
+    }
   };
+
   return (
     <Styled.Wrapper>
-      <AccommodationForm onAdd={onAdd} acc={undefined} />
+      {id ? (
+        <>
+          {acc ? (
+            <AccommodationForm onSave={onSave} acc={acc} />
+          ) : (
+            <p>loading</p>
+          )}
+        </>
+      ) : (
+        <>
+          <AccommodationForm onSave={onSave} acc={acc} />
+        </>
+      )}
     </Styled.Wrapper>
   );
 };
