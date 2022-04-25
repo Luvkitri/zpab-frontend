@@ -17,5 +17,8 @@ export const HeaderWrapper = styled('div')`
 `;
 
 export const PageWrapper = styled('div')`
-  margin: 64px 100px;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  margin: 72px auto 0;
 `;

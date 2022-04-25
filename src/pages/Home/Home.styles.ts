@@ -9,6 +9,9 @@ export const Wrapper = styled('div')`
   justify-content: center;
   align-items: center;
   padding: 24px;
+  max-width: 800px;
+  min-width: 320px;
+  margin: 0 auto;
 `;
 
 export const TitleWrapper = styled('div')`
@@ -16,11 +19,11 @@ export const TitleWrapper = styled('div')`
 `;
 
 export const SearchBarWrapper = styled('div')`
-  width: 60%;
+  width: 100%;
 `;
 
 export const ResultWrapper = styled('div')`
-  width: 60%;
+  width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -44,7 +47,5 @@ export const StrongText = styled('strong')`
   padding-right: 0.5rem;
 `;
 
-export const PaginationWrapper = styled('div')`
-`;
-export const PaginationButton = styled(MuiButton)`
-`;
+export const PaginationWrapper = styled('div')``;
+export const PaginationButton = styled(MuiButton)``;
