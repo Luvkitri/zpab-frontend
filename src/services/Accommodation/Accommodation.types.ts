@@ -1,3 +1,4 @@
+import { AccommodationStatisticsProps } from '@pages/AdminPanel/AdminPanel.types';
 import { UserDataProps } from '@services/User/User.types';
 
 export interface AccommodationDataProps {
@@ -35,28 +36,32 @@ export interface ResponseAccommodationSearchResults {
 }
 
 interface PageableSort {
-  empty: boolean,
-  sorted: boolean,
-  unsorted: boolean,
+  empty: boolean;
+  sorted: boolean;
+  unsorted: boolean;
 }
 interface Pageable {
-  sort: PageableSort,
-  offset: number,
-  pageSize: number,
-  pageNumber: number,
-  paged: boolean,
-  unpaged: boolean
+  sort: PageableSort;
+  offset: number;
+  pageSize: number;
+  pageNumber: number;
+  paged: boolean;
+  unpaged: boolean;
 }
 export interface PaginationResponse {
-  content: Array<AccommodationDataProps>,
-  pageable?: Pageable,
-  last?: boolean,
-  totalPages?: number,
-  totalElements?: number,
-  size?: number,
-  number?: number,
-  sort?: PageableSort,
-  first?: boolean,
-  numberOfElements?: number,
-  empty?: boolean
+  content: Array<AccommodationDataProps>;
+  pageable?: Pageable;
+  last?: boolean;
+  totalPages?: number;
+  totalElements?: number;
+  size?: number;
+  number?: number;
+  sort?: PageableSort;
+  first?: boolean;
+  numberOfElements?: number;
+  empty?: boolean;
+}
+
+export interface ResponseAccommodationStatsResults {
+  data: AccommodationStatisticsProps;
 }

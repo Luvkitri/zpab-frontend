@@ -2,12 +2,9 @@ import { FC, useEffect, useState } from 'react';
 import { Modal, Typography } from '@mui/material';
 
 import SearchBar from '@components/SearchBar/SearchBar';
-import { SelectedUserProps, UserDataProps } from '@services/User/User.types';
+import { SelectedUserProps } from '@services/User/User.types';
 import AccommodationService from '@services/Accommodation/Accommodation.service';
-import {
-  AccommodationDataProps,
-  PaginationResponse,
-} from '@services/Accommodation/Accommodation.types';
+import { PaginationResponse } from '@services/Accommodation/Accommodation.types';
 
 import * as Styled from './Home.styles';
 import AccommodationCard from '@components/AccommodationCard/AccommodationCard';
@@ -100,7 +97,9 @@ const Home: FC = () => {
       AccommodationService.delete(id)
         .then(() => {
           alert('Accommodation deleted.');
-          setAccommodations(accommodations.filter((acc) => acc.id != id));
+          setAccommodations(
+            accommodations.filter((acc) => acc.id != id),
+          );
         })
         .catch(alert);
     }

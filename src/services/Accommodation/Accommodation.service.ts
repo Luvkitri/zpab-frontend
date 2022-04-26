@@ -5,6 +5,7 @@ import {
   ResponseSingleAccommodationDataProps,
   ResponseAccommodationDataProps,
   PaginationResponse,
+  ResponseAccommodationStatsResults,
 } from './Accommodation.types';
 
 class Accommodation {
@@ -18,9 +19,11 @@ class Accommodation {
     return axios.get(`${this.endpoint}?userId=${userId}`);
   }
   getAll(): Promise<ResponseAccommodationSearchResults> {
-    return axios.get(`${this.endpoint}?sort=id,desc`)
+    return axios.get(`${this.endpoint}?sort=id,desc`);
   }
-  update(acc: AccommodationDataProps): Promise<{ data: AccommodationDataProps }> {
+  update(
+    acc: AccommodationDataProps,
+  ): Promise<{ data: AccommodationDataProps }> {
     return axios.put(`${this.endpoint}/${acc.id}`, acc);
   }
   delete(id: number): Promise<void> {
@@ -38,7 +41,13 @@ class Accommodation {
     city: string,
     pageNumber?: number,
   ): Promise<ResponseAccommodationSearchResults> {
-    return axios.get(`${this.endpoint}?city=${city}&page=${pageNumber}&sort=id,desc`);
+    return axios.get(
+      `${this.endpoint}?city=${city}&page=${pageNumber}&sort=id,desc`,
+    );
+  }
+
+  getStats(): Promise<ResponseAccommodationStatsResults> {
+    return axios.get(`${this.endpoint}/stats`);
   }
 }
 
