@@ -10,7 +10,7 @@ export const Wrapper = styled('div')`
   align-items: center;
   padding: 24px;
   max-width: 800px;
-  min-width: 320px;
+  min-width: 200;
   margin: 0 auto;
 `;
 
@@ -40,7 +40,7 @@ export const DetailsModalContainer = styled('div')`
   border-radius: 5px;
 `;
 export const BigButton = styled(ButtonUnstyled)`
-  height: 72px;
+  min-height: 72px;
   font-size: inherit;
 `;
 export const StrongText = styled('strong')`
