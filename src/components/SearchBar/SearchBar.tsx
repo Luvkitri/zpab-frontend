@@ -46,10 +46,10 @@ const SearchBar = ({
         )}
       />
       <Styled.Button
-        variant="outlined"
+        variant="contained"
         onClick={() => handleSearchButtonClick(inputValue)}
       >
-        Search
+        <icons.Search />
       </Styled.Button>
     </Styled.Wrapper>
   );
