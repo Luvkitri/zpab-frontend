@@ -18,7 +18,7 @@ class Accommodation {
     return axios.get(`${this.endpoint}?userId=${userId}`);
   }
   getAll(): Promise<ResponseAccommodationSearchResults> {
-    return axios.get(`${this.endpoint}`)
+    return axios.get(`${this.endpoint}?sort=id,desc`)
   }
   update(acc: AccommodationDataProps): Promise<{ data: AccommodationDataProps }> {
     return axios.put(`${this.endpoint}/${acc.id}`, acc);
@@ -38,7 +38,7 @@ class Accommodation {
     city: string,
     pageNumber?: number,
   ): Promise<ResponseAccommodationSearchResults> {
-    return axios.get(`${this.endpoint}?city=${city}&page=${pageNumber}`);
+    return axios.get(`${this.endpoint}?city=${city}&page=${pageNumber}&sort=id,desc`);
   }
 }
 

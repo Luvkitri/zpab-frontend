@@ -35,7 +35,7 @@ export const InfoWrapper = styled('div')`
   align-items: center;
   flex-wrap: wrap;
   gap: 4px;
-  height: 30px;
+  minheight: 30px;
 
   & > span :first-child {
     margin-right: 4px;

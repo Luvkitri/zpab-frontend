@@ -14,5 +14,5 @@ export const TextField = styled(MuiTextField)`
 `;
 
 export const Button = styled(MuiButton)`
-  width: 200px;
+  // width: 100px;
 `;
