@@ -40,7 +40,7 @@ const AccommodationCard = ({
           </Avatar>
         }
         title={firstName}
-        subheader="September 14, 2016"
+        subheader=""
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
