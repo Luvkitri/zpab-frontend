@@ -18,7 +18,7 @@ export const Wrapper = styled('div')`
   align-items: center;
 `;
 export const ResultWrapper = styled('div')`
-  width: 60%;
+  width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
