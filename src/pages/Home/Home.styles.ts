@@ -33,8 +33,8 @@ export const ResultWrapper = styled('div')`
 
 export const DetailsModalContainer = styled('div')`
   background-color: white;
-  width: 100vh;
-  height: 80vh;
+  max-width: 400px;
+  height: 70vh;
   padding: 10px;
   margin: 100px auto;
   border-radius: 5px;
