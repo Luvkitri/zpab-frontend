@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, IconButton, Typography } from '@mui/material';
 import * as icons from '@mui/icons-material';
 
 import { useNavigate } from 'react-router-dom';
 import {
   isSignedIn as _isSignedIn,
+  isAdmin as _isAdmin,
   signOut,
   getUserEmail,
   onSignChange,
@@ -15,9 +16,11 @@ import * as Styled from './Header.styles';
 const Header = () => {
   const navigate = useNavigate();
   const [isSignedIn, setSignedIn] = useState(_isSignedIn());
+  const [isAdmin, setIsAdmin] = useState(_isAdmin());
 
   const updateState = () => {
     setSignedIn(_isSignedIn());
+    setIsAdmin(_isAdmin());
   };
 
   onSignChange(updateState);
@@ -26,9 +29,23 @@ const Header = () => {
     navigate('/account');
   };
 
+  const handleAdminButtonClick = () => {
+    navigate('/admin');
+  };
+
   const renderButtonsSignedIn = () => {
     return (
       <>
+        {isAdmin && (
+          <Button
+            variant="contained"
+            aria-label="admin-panel"
+            disableElevation
+            onClick={handleAdminButtonClick}
+          >
+            Admin panel
+          </Button>
+        )}
         <Button
           variant="contained"
           aria-label="account"

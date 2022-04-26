@@ -1,5 +1,5 @@
 import axios from '@utils/api';
-import { ResponseUserDataProps, UserDataProps } from './User.types';
+import { ResponseUserDataProps, ResponseUserStatisticsProps, UserDataProps } from './User.types';
 
 class User {
   endpoint: string;
@@ -62,6 +62,10 @@ class User {
           reject(`Login request failed: ${reason}`);
         });
     });
+  }
+
+  getStats(): Promise<ResponseUserStatisticsProps> {
+    return axios.get(`${this.endpoint}/stats`);
   }
 }
 

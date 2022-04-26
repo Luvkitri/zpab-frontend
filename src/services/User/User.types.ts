@@ -1,3 +1,5 @@
+import { UserStatisticsProps } from "@pages/AdminPanel/AdminPanel.types";
+
 export interface UserDataProps {
   id: number;
   firstName: string;
@@ -17,4 +19,8 @@ export interface SelectedUserProps {
 
 export interface ResponseUserDataProps {
   data: UserDataProps;
+}
+
+export interface ResponseUserStatisticsProps {
+  data: UserStatisticsProps;
 }
