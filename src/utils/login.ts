@@ -50,7 +50,7 @@ export const isAdmin = () => {
     let sth = jwt_decode<Jwt>(token);
     return sth.is_admin;
   } else {
-    throw 'Not logged in';
+    return false;
   }
 }
 
