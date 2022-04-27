@@ -1,4 +1,10 @@
-import { CircularProgress, Divider, Grid, Typography } from '@mui/material';
+import {
+  Button,
+  CircularProgress,
+  Divider,
+  Grid,
+  Typography,
+} from '@mui/material';
 import { ReactElement, useEffect, useState } from 'react';
 import { LinearProgress } from '@mui/material';
 import Card from '@mui/material/Card';
@@ -34,7 +40,8 @@ const AdminPanel = (): ReactElement => {
       citiesAvailableNowMax: 0,
     });
 
-  useEffect(() => {
+  const loadData = async () => {
+    setLoading(true);
     const retrieveUserStats = async () => {
       try {
         const response = await UserService.getStats();
@@ -76,151 +83,172 @@ const AdminPanel = (): ReactElement => {
         setLoading(false);
       },
     );
+  };
+
+  useEffect(() => {
+    loadData();
   }, []);
 
   return (
     <Styled.Container>
-      <Styled.StatsContainer>
-        <Typography variant="h4">Accommodations statistics</Typography>
-        <Card>
-          <CardContent>
-            <Typography>
-              Total number of accommodations: {accommodationStatistics.count}
-            </Typography>
-          </CardContent>
-        </Card>
+      <Styled.GridContainer>
+        <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 8 }}>
+          <Grid item xs={4}>
+            <Button variant="contained" onClick={loadData}>
+              Refresh statistics
+            </Button>
 
-        <Card>
-          <CardContent>
-            <Typography variant="button">Accommodations by city:</Typography>
-            <Styled.CitiesListWrapper>
-              {loading ? <CircularProgress /> : <></>}
+            <Card>
+              <CardContent>
+                <Typography variant="button">
+                  Total number of accommodations:{' '}
+                  {accommodationStatistics.count}
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent>
+                <Typography variant="button">
+                  Total number of available beds: {accommodationStatistics.beds}
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent>
+                <Typography variant="button">
+                  Total number of users: {userStatistics.count}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
 
-              {Object.keys(accommodationStatistics.citiesCount).map(
-                (key, index) => (
-                  <Styled.CityListItem
-                    key={`city-count-item-${index.toString()}`}
-                  >
-                    {key}: {accommodationStatistics.citiesCount[key]}
-                    <LinearProgress
-                      variant="determinate"
-                      value={
-                        (accommodationStatistics.citiesCount[key] /
-                          accommodationStatistics.citiesCountMax) *
-                        100
-                      }
-                    />
-                  </Styled.CityListItem>
-                ),
-              )}
-            </Styled.CitiesListWrapper>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent>
-            <Typography variant="button">
-              Total number of beds: {accommodationStatistics.beds}
-            </Typography>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent>
-            <Typography variant="button">
-              Number of available beds in each city:
-            </Typography>
-            <Styled.CitiesListWrapper>
-              {loading ? <CircularProgress /> : <></>}
+          <Grid item xs={4}>
+            <Card>
+              <CardContent>
+                <Typography variant="button">
+                  Accommodations by city:
+                </Typography>
+                <Styled.CitiesListWrapper>
+                  {loading ? <CircularProgress /> : <></>}
 
-              {Object.keys(accommodationStatistics.citiesBeds).map(
-                (key, index) => (
-                  <Styled.CityListItem
-                    key={`city-pet-count-item-${index.toString()}`}
-                  >
-                    {key}: {accommodationStatistics.citiesBeds[key]}
-                    <LinearProgress
-                      variant="determinate"
-                      color="secondary"
-                      value={
-                        (accommodationStatistics.citiesBeds[key] /
-                          accommodationStatistics.citiesBedsMax) *
-                        100
-                      }
-                    />
-                  </Styled.CityListItem>
-                ),
-              )}
-            </Styled.CitiesListWrapper>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent>
-            <Typography variant="button">
-              Accommodations taking in pets:
-            </Typography>
-            <Styled.CitiesListWrapper>
-              {loading ? <CircularProgress /> : <></>}
+                  {Object.keys(accommodationStatistics.citiesCount).map(
+                    (key, index) => (
+                      <Styled.CityListItem
+                        key={`city-count-item-${index.toString()}`}
+                      >
+                        {key}: {accommodationStatistics.citiesCount[key]}
+                        <LinearProgress
+                          variant="determinate"
+                          value={
+                            (accommodationStatistics.citiesCount[key] /
+                              accommodationStatistics.citiesCountMax) *
+                            100
+                          }
+                        />
+                      </Styled.CityListItem>
+                    ),
+                  )}
+                </Styled.CitiesListWrapper>
+              </CardContent>
+            </Card>
+          </Grid>
 
-              {Object.keys(accommodationStatistics.citiesPets).map(
-                (key, index) => (
-                  <Styled.CityListItem
-                    key={`city-pet-count-item-${index.toString()}`}
-                  >
-                    {key}: {accommodationStatistics.citiesPets[key]}
-                    <LinearProgress
-                      variant="determinate"
-                      color="success"
-                      value={
-                        (accommodationStatistics.citiesPets[key] /
-                          accommodationStatistics.citiesPetsMax) *
-                        100
-                      }
-                    />
-                  </Styled.CityListItem>
-                ),
-              )}
-            </Styled.CitiesListWrapper>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent>
-            <Typography variant="button">
-              Accommodations available right now:
-            </Typography>
-            <Styled.CitiesListWrapper>
-              {loading ? <CircularProgress /> : <></>}
+          <Grid item xs={4}>
+            <Card>
+              <CardContent>
+                <Typography variant="button">
+                  Number of available beds in each city:
+                </Typography>
+                <Styled.CitiesListWrapper>
+                  {loading ? <CircularProgress /> : <></>}
 
-              {Object.keys(accommodationStatistics.citiesAvailableNow).map(
-                (key, index) => (
-                  <Styled.CityListItem
-                    key={`city-pet-count-item-${index.toString()}`}
-                  >
-                    {key}: {accommodationStatistics.citiesAvailableNow[key]}
-                    <LinearProgress
-                      variant="determinate"
-                      color="info"
-                      value={
-                        (accommodationStatistics.citiesAvailableNow[key] /
-                          accommodationStatistics.citiesAvailableNowMax) *
-                        100
-                      }
-                    />
-                  </Styled.CityListItem>
-                ),
-              )}
-            </Styled.CitiesListWrapper>
-          </CardContent>
-        </Card>
-      </Styled.StatsContainer>
-      <Styled.StatsContainer>
-        <Typography variant="h4">Users statistics</Typography>
-        <Card>
-          <CardContent>
-            <Typography variant="button">
-              Total number of users: {userStatistics.count}
-            </Typography>
-          </CardContent>
-        </Card>
-      </Styled.StatsContainer>
+                  {Object.keys(accommodationStatistics.citiesBeds).map(
+                    (key, index) => (
+                      <Styled.CityListItem
+                        key={`city-pet-count-item-${index.toString()}`}
+                      >
+                        {key}: {accommodationStatistics.citiesBeds[key]}
+                        <LinearProgress
+                          variant="determinate"
+                          color="secondary"
+                          value={
+                            (accommodationStatistics.citiesBeds[key] /
+                              accommodationStatistics.citiesBedsMax) *
+                            100
+                          }
+                        />
+                      </Styled.CityListItem>
+                    ),
+                  )}
+                </Styled.CitiesListWrapper>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item xs={4}>
+            <Card>
+              <CardContent>
+                <Typography variant="button">
+                  Accommodations taking in pets:
+                </Typography>
+                <Styled.CitiesListWrapper>
+                  {loading ? <CircularProgress /> : <></>}
+
+                  {Object.keys(accommodationStatistics.citiesPets).map(
+                    (key, index) => (
+                      <Styled.CityListItem
+                        key={`city-pet-count-item-${index.toString()}`}
+                      >
+                        {key}: {accommodationStatistics.citiesPets[key]}
+                        <LinearProgress
+                          variant="determinate"
+                          color="success"
+                          value={
+                            (accommodationStatistics.citiesPets[key] /
+                              accommodationStatistics.citiesPetsMax) *
+                            100
+                          }
+                        />
+                      </Styled.CityListItem>
+                    ),
+                  )}
+                </Styled.CitiesListWrapper>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={4}>
+            <Card>
+              <CardContent>
+                <Typography variant="button">
+                  Accommodations available right now:
+                </Typography>
+                <Styled.CitiesListWrapper>
+                  {loading ? <CircularProgress /> : <></>}
+
+                  {Object.keys(accommodationStatistics.citiesAvailableNow).map(
+                    (key, index) => (
+                      <Styled.CityListItem
+                        key={`city-pet-count-item-${index.toString()}`}
+                      >
+                        {key}: {accommodationStatistics.citiesAvailableNow[key]}
+                        <LinearProgress
+                          variant="determinate"
+                          color="info"
+                          value={
+                            (accommodationStatistics.citiesAvailableNow[key] /
+                              accommodationStatistics.citiesAvailableNowMax) *
+                            100
+                          }
+                        />
+                      </Styled.CityListItem>
+                    ),
+                  )}
+                </Styled.CitiesListWrapper>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      </Styled.GridContainer>
     </Styled.Container>
   );
 };

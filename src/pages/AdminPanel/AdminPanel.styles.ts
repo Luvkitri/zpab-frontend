@@ -5,6 +5,14 @@ export const Container = styled('div')`
   flex-direction: row;
   justify-content: space-evenly;
   padding: 24px;
+  
+  
+`;
+export const GridContainer = styled('div')`
+  max-width:800px;
+
+  
+  
 `;
 
 export const StatsContainer = styled('div')`
@@ -21,4 +29,5 @@ export const StatsContainer = styled('div')`
 
 export const CitiesListWrapper = styled('ul')``;
 
-export const CityListItem = styled('li')``;
+export const CityListItem = styled('li')`
+padding-top:0.5rem;`;
